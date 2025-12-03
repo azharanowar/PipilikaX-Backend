@@ -917,6 +917,7 @@ header {
   font-size: 1.1rem;
   margin-bottom: 20px;
 }
+
 .blog-single-content::first-letter {
   font-size: 2rem;
   font-weight: bold;
@@ -1393,7 +1394,7 @@ header {
   .about-image,
   .about-content {
     width: 100%;
-    text-align: center;
+    text-align: center !important;
   }
 
   #planetNamesSection {
@@ -1517,6 +1518,7 @@ header {
   .about-image,
   .about-content {
     width: 100%;
+    text-align: center !important;
   }
 
   .about-container {

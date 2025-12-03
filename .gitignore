@@ -1,0 +1,31 @@
+# Configuration files
+config/database.php
+
+# Uploads (keep structure, ignore content)
+uploads/*
+!uploads/.htaccess
+!uploads/blog/
+!uploads/team/
+!uploads/temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+*.swo
+
+# Logs
+*.log
+error_log
+debug.log
+
+# Temporary files
+*.tmp
+*.bak
+*~

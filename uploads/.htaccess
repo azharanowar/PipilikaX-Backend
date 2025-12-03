@@ -1,0 +1,9 @@
+# Prevent PHP execution in uploads directory
+<Files *.php>
+    Require all denied
+</Files>
+
+# Allow image and document access
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|pdf|doc|docx)$">
+    Require all granted
+</FilesMatch>
