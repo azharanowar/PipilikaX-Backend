@@ -5,13 +5,13 @@ Options -Indexes
 RewriteEngine On
 RewriteBase /PipilikaX-Backend/
 
+# Blog post pretty URLs - must come before .php removal
+RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog.php?slug=$1 [L,QSA]
+
 # Remove .php extension
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php [L]
-
-# Blog post pretty URLs
-RewriteRule ^blog/([a-z0-9-]+)$ blog.php?slug=$1 [L,QSA]
 
 # Security headers
 <IfModule mod_headers.c>

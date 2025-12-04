@@ -1,157 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+/**
+ * Blogs Listing Page - PipilikaX
+ * Dynamic version fetching from database
+ */
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PipilikaX - Your Space for AutoNotes</title>
-    <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/images/pipilika-favicon.png">
-    <meta name="theme-color" content="#E90330" />
-    <link href="assets/css/styles.css" rel="stylesheet" />
-    <style>
+$page_title = 'Blogs';
 
-    </style>
-</head>
+// Include header and navigation
+require_once __DIR__ . '/includes/templates/header.php';
+require_once __DIR__ . '/includes/templates/navigation.php';
 
-<body>
-    <header>
-        <div id="headerSection" class="header-inner">
-            <!-- Logo -->
-            <div class="logo-container">
-                <a href="index.html" class="logo">
-                    <img id="logoImage" src="assets/images/pipilika-logo.png" alt="PipilikaX Logo" />
-                </a>
-            </div>
+// Pagination
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$per_page = POSTS_PER_PAGE;
+$offset = ($page - 1) * $per_page;
 
-            <!-- Desktop Navigation -->
-            <nav class="desktop-nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blogs.html" class="active">Blogs</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="contact-us.html">Contact Us</a></li>
-                </ul>
-            </nav>
+// Get total published posts
+$total_stmt = $pdo->query("SELECT COUNT(*) FROM blog_posts WHERE status = 'published'");
+$total_posts = $total_stmt->fetchColumn();
+$total_pages = ceil($total_posts / $per_page);
 
-            <!-- Desktop CTA Button -->
-            <div class="desktop-btn">
-                <a href="#"><button class="btn">Join Now <img src="assets/images/arrow-white.svg" /></button></a>
+// Get published posts
+$posts_query = "
+    SELECT p.*, u.full_name as author_name, c.name as category_name
+    FROM blog_posts p
+    LEFT JOIN users u ON p.author_id = u.id
+    LEFT JOIN categories c ON p.category_id = c.id
+    WHERE p.status = 'published'
+    ORDER BY p.published_at DESC
+    LIMIT $per_page OFFSET $offset
+";
+$posts = $pdo->query($posts_query)->fetchAll();
+?>
+
+<main>
+    <section id="blogsSection">
+        <div class="container">
+            <div class="blogs-header">
+                <h1>Our Space Chronicles</h1>
+                <p>Explore the latest discoveries, missions, and wonders from across the cosmos</p>
             </div>
 
-            <!-- Hamburger Icon -->
-            <div id="menuToggle" class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+            <?php if (count($posts) > 0): ?>
+                <div class="blog-grid">
+                    <?php
+                    // Fallback images from assets when uploads don't exist
+                    $fallback_images = ['image-4.jpg', 'rocket.jpg', 'space-robot-man.jpg', 'image-of-the-day.jpg', 'planets-image.jpg', 'space.jpg', 'sapceX-image.jpg', 'spaceX-vertical.jpg'];
+                    $img_index = 0;
 
-        <!-- Fullscreen Popup Menu -->
-        <div id="fullScreenMenu" class="full-screen-menu">
-            <div class="close-btn" id="closeMenu">&times;</div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blogs.html" class="active">Blogs</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-                <li><a href="contact-us.html">Contact Us</a></li>
-                <li><a href="#"><button class="btn">Join Now <img src="assets/images/arrow-white.svg" /></button></a>
-                </li>
-            </ul>
-        </div>
-    </header>
+                    foreach ($posts as $post):
+                        // Use uploaded image if exists, otherwise use fallback
+                        if ($post['featured_image'] && file_exists(UPLOAD_PATH . 'blog/' . $post['featured_image'])) {
+                            $image_src = UPLOAD_URL . '/blog/' . htmlspecialchars($post['featured_image']);
+                        } else {
+                            $image_src = ASSETS_URL . '/images/' . $fallback_images[$img_index % count($fallback_images)];
+                            $img_index++;
+                        }
+                    ?>
+                        <div class="blog-card">
+                            <img class="blog-image"
+                                 src="<?php echo $image_src; ?>"
+                                 alt="<?php echo htmlspecialchars($post['title']); ?>">
 
+                            <div class="blog-content">
+                                <h3><?php echo htmlspecialchars($post['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($post['excerpt'] ?: truncate($post['content'], 150)); ?></p>
+                                <a href="<?php echo SITE_URL; ?>/blog/<?php echo htmlspecialchars($post['slug']); ?>">
+                                    <button class="btn">
+                                        Learn More <img src="<?php echo ASSETS_URL; ?>/images/arrow-white.svg" alt="Arrow" />
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
 
+                <?php if ($total_pages > 1): ?>
+                    <div class="pagination">
+                        <?php if ($page > 1): ?>
+                            <a href="?page=<?php echo $page - 1; ?>" class="pagination-btn">
+                                <img src="<?php echo ASSETS_URL; ?>/images/arrow-left.svg" alt="Previous"> Previous
+                            </a>
+                        <?php endif; ?>
 
-    <main>
-        <!-- Blog List Section -->
-<section id="blogList">
-    <h2 class="section-title">Latest Articles</h2>
-    <div class="blog-grid">
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/image-4.jpg" alt="Blog 1">
-            <div class="blog-content">
-                <h3>Behind the Scenes: Building PipilikaX</h3>
-                <p>How IoT and AI are transforming urban living environments around the globe.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/rocket.jpg" alt="Blog 2">
-            <div class="blog-content">
-                <h3>The Rise of Smart Cities</h3>
-                <p>Minimalism, motion design, and accessibility are reshaping user experience.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/space-robot-man.jpg" alt="Blog 3">
-            <div class="blog-content">
-                <h3>AI in Everyday Life</h3>
-                <p>Discover how artificial intelligence is making life easier and smarter.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/image-of-the-day.jpg" alt="Blog 1">
-            <div class="blog-content">
-                <h3>The Rise of Smart Cities</h3>
-                <p>How IoT and AI are transforming urban living environments around the globe.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/planets-image.jpg" alt="Blog 2">
-            <div class="blog-content">
-                <h3>UX Design Trends 2025</h3>
-                <p>Minimalism, motion design, and accessibility are reshaping user experience.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/rocket.jpg" alt="Blog 3">
-            <div class="blog-content">
-                <h3>AI in Everyday Life</h3>
-                <p>Discover how artificial intelligence is making life easier and smarter.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/space.jpg" alt="Blog 1">
-            <div class="blog-content">
-                <h3>The Rise of Smart Cities</h3>
-                <p>How IoT and AI are transforming urban living environments around the globe.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/sapceX-image.jpg" alt="Blog 2">
-            <div class="blog-content">
-                <h3>UX Design Trends 2025</h3>
-                <p>Minimalism, motion design, and accessibility are reshaping user experience.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <img class="blog-image" src="assets/images/spaceX-vertical.jpg" alt="Blog 3">
-            <div class="blog-content">
-                <h3>AI in Everyday Life</h3>
-                <p>Discover how artificial intelligence is making life easier and smarter.</p>
-                <a href="blog-single.html"><button class="btn">Learn More <img src="assets/images/arrow-white.svg" /></button></a>
-            </div>
-        </div>
-    </div>
-</section>
+                        <div class="pagination-numbers">
+                            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                <?php if ($i == $page): ?>
+                                    <span class="pagination-number active"><?php echo $i; ?></span>
+                                <?php else: ?>
+                                    <a href="?page=<?php echo $i; ?>" class="pagination-number"><?php echo $i; ?></a>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                        </div>
 
-    </main>
-    <footer>
-        <a href="https://github.com/azharanowar/pipilikaX" target="_blank"><strong>PipilikaX</strong></a> || Copyright ©
-        2025 – All rights reserved.
-    </footer>
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
-<button id="scrollToTopBtn" title="Go to top"><img src="assets/images/scroll-to-top.gif"/></button>
-<script src="assets/js/scripts.js"></script>
-</body>
-</html>
+                        <?php if ($page < $total_pages): ?>
+                            <a href="?page=<?php echo $page + 1; ?>" class="pagination-btn">
+                                Next <img src="<?php echo ASSETS_URL; ?>/images/arrow-right.svg" alt="Next">
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+
+            <?php else: ?>
+                <div class="empty-blogs">
+                    <img src="<?php echo ASSETS_URL; ?>/images/space.jpg" alt="No posts"
+                        style="max-width: 400px; opacity: 0.5; border-radius: 12px;">
+                    <h2>No Posts Yet</h2>
+                    <p>Our space chronicles are being prepared. Check back soon for exciting updates!</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+</main>
+
+<?php require_once __DIR__ . '/includes/templates/footer.php'; ?>
