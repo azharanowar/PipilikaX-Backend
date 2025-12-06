@@ -56,11 +56,10 @@ $posts = $pdo->query($posts_query)->fetchAll();
                             $image_src = ASSETS_URL . '/images/' . $fallback_images[$img_index % count($fallback_images)];
                             $img_index++;
                         }
-                    ?>
+                        ?>
                         <div class="blog-card">
-                            <img class="blog-image"
-                                 src="<?php echo $image_src; ?>"
-                                 alt="<?php echo htmlspecialchars($post['title']); ?>">
+                            <img class="blog-image" src="<?php echo $image_src; ?>"
+                                alt="<?php echo htmlspecialchars($post['title']); ?>">
 
                             <div class="blog-content">
                                 <h3><?php echo htmlspecialchars($post['title']); ?></h3>

@@ -212,12 +212,29 @@ $categories = $pdo->query("SELECT * FROM categories ORDER BY name ASC")->fetchAl
 
         <div class="form-group">
             <label for="featured_image">Featured Image</label>
-            <?php if ($post && $post['featured_image']): ?>
-                <div style="margin-bottom: 10px;">
-                    <img src="<?php echo UPLOAD_URL; ?>/blog/<?php echo htmlspecialchars($post['featured_image']); ?>"
-                        alt="Current featured image"
-                        style="max-width: 300px; border-radius: 8px; border: 1px solid var(--admin-border);">
-                </div>
+            <?php if ($post && $post['featured_image']):
+                // Check uploads folder first, then assets folder for legacy images
+                $upload_image_path = UPLOAD_PATH . 'blog/' . $post['featured_image'];
+                $assets_image_path = ROOT_PATH . '/assets/images/' . $post['featured_image'];
+
+                if (file_exists($upload_image_path)) {
+                    $image_url = UPLOAD_URL . '/blog/' . htmlspecialchars($post['featured_image']);
+                } elseif (file_exists($assets_image_path)) {
+                    $image_url = ASSETS_URL . '/images/' . htmlspecialchars($post['featured_image']);
+                } else {
+                    $image_url = null;
+                }
+
+                if ($image_url):
+                    ?>
+                    <div style="margin-bottom: 10px;">
+                        <img src="<?php echo $image_url; ?>" alt="Current featured image"
+                            style="max-width: 300px; border-radius: 8px; border: 1px solid var(--admin-border);">
+                        <p style="margin-top: 5px; color: var(--admin-text-light); font-size: 12px;">
+                            Current: <?php echo htmlspecialchars($post['featured_image']); ?>
+                        </p>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
             <input type="file" id="featured_image" name="featured_image" class="form-control" accept="image/*">
             <small style="color: var(--admin-text-light);">Accepted: JPG, PNG, GIF, WEBP. Max size: 5MB</small>
