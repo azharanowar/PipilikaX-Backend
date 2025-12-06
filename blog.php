@@ -45,12 +45,21 @@ $page_title = $post['title'];
 // Include navigation
 require_once __DIR__ . '/includes/templates/navigation.php';
 
-// Determine image source - use uploaded or fallback
-if ($post['featured_image'] && file_exists(UPLOAD_PATH . 'blog/' . $post['featured_image'])) {
-    $post_image = UPLOAD_URL . '/blog/' . htmlspecialchars($post['featured_image']);
-} else {
-    // Fallback to an existing asset image
-    $post_image = ASSETS_URL . '/images/space.jpg';
+// Check if image exists in uploads or assets
+$has_image = false;
+$post_image = '';
+
+if ($post['featured_image']) {
+    // First check uploads folder
+    if (file_exists(UPLOAD_PATH . 'blog/' . $post['featured_image'])) {
+        $has_image = true;
+        $post_image = UPLOAD_URL . '/blog/' . htmlspecialchars($post['featured_image']);
+    }
+    // Then check assets folder
+    elseif (file_exists(ROOT_PATH . '/assets/images/' . $post['featured_image'])) {
+        $has_image = true;
+        $post_image = ASSETS_URL . '/images/' . htmlspecialchars($post['featured_image']);
+    }
 }
 
 // Get related posts (same category, excluding current)
@@ -83,7 +92,7 @@ if ($post['category_id']) {
 
             <!-- Post Header -->
             <article class="blog-single">
-                <header class="blog-hero">
+                <div class="blog-hero">
                     <?php if ($post['category_name']): ?>
                         <span class="blog-category"
                             style="display: inline-block; background: #E90330; color: white; padding: 5px 15px; border-radius: 20px; margin-bottom: 15px; font-size: 14px;">
@@ -92,7 +101,8 @@ if ($post['category_id']) {
                     <?php endif; ?>
 
                     <h1 class="blog-title" style="font-size: 2.5em; margin: 10px 0;">
-                        <?php echo htmlspecialchars($post['title']); ?></h1>
+                        <?php echo htmlspecialchars($post['title']); ?>
+                    </h1>
 
                     <div class="blog-meta"
                         style="display: flex; gap: 20px; margin: 15px 0; color: #666; font-size: 14px;">
@@ -107,7 +117,7 @@ if ($post['category_id']) {
                             <strong>Views:</strong> <?php echo number_format($post['views']); ?>
                         </span>
                     </div>
-                </header>
+                </div>
 
                 <!-- Featured Image -->
                 <?php if ($post_image): ?>
@@ -129,12 +139,15 @@ if ($post['category_id']) {
 
                 <!-- Author Box -->
                 <?php if ($post['author_name']): ?>
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin: 40px 0; display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 60px; height: 60px; border-radius: 50%; background: #E90330; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">
+                    <div
+                        style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin: 40px 0; display: flex; align-items: center; gap: 20px;">
+                        <div
+                            style="width: 60px; height: 60px; border-radius: 50%; background: #E90330; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">
                             <?php echo strtoupper(substr($post['author_name'], 0, 1)); ?>
                         </div>
                         <div>
-                            <h4 style="margin: 0 0 5px 0;">Written by <?php echo htmlspecialchars($post['author_name']); ?></h4>
+                            <h4 style="margin: 0 0 5px 0;">Written by <?php echo htmlspecialchars($post['author_name']); ?>
+                            </h4>
                             <?php if ($post['author_bio']): ?>
                                 <p style="margin: 0; color: #666;"><?php echo htmlspecialchars($post['author_bio']); ?></p>
                             <?php endif; ?>
@@ -143,22 +156,68 @@ if ($post['category_id']) {
                 <?php endif; ?>
 
                 <!-- Share Buttons -->
-                <div style="margin: 40px 0; text-align: center;">
-                    <h4 style="margin-bottom: 20px;">Share this post:</h4>
-                    <div style="display: flex; gap: 10px; justify-content: center;">
-                        <a href="https://facebook.com/sharer/sharer.php?u=<?php echo urlencode(SITE_URL . '/blog/' . $post['slug']); ?>" 
-                           target="_blank" 
-                           style="display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: #1877f2; color: white; text-decoration: none; font-size: 20px;">
+                <div class="share-section" style="margin: 40px 0; text-align: center;">
+                    <h4 style="margin-bottom: 20px; color: #333;">Share this post:</h4>
+                    <style>
+                        .share-icons {
+                            display: flex;
+                            gap: 16px;
+                            justify-content: center;
+                        }
+
+                        .share-icons .share-icon {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 44px;
+                            height: 44px;
+                            border-radius: 12px;
+                            background: rgba(0, 0, 0, 0.05);
+                            border: 1px solid rgba(0, 0, 0, 0.1);
+                            color: #666;
+                            font-size: 20px;
+                            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                            text-decoration: none;
+                        }
+
+                        .share-icons .share-icon i {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        .share-icons .share-icon:hover {
+                            transform: translateY(-5px) scale(1.05);
+                            color: #fff;
+                            border-color: transparent;
+                        }
+
+                        .share-icons .share-icon.facebook:hover {
+                            background: linear-gradient(135deg, #1877f2 0%, #0d5ed8 100%);
+                            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
+                        }
+
+                        .share-icons .share-icon.twitter:hover {
+                            background: linear-gradient(135deg, #1da1f2 0%, #0c85d0 100%);
+                            box-shadow: 0 8px 25px rgba(29, 161, 242, 0.4);
+                        }
+
+                        .share-icons .share-icon.linkedin:hover {
+                            background: linear-gradient(135deg, #0077b5 0%, #005a8a 100%);
+                            box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+                        }
+                    </style>
+                    <div class="share-icons">
+                        <a href="https://facebook.com/sharer/sharer.php?u=<?php echo urlencode(SITE_URL . '/blog/' . $post['slug']); ?>"
+                            target="_blank" title="Share on Facebook" class="share-icon facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(SITE_URL . '/blog/' . $post['slug']); ?>&text=<?php echo urlencode($post['title']); ?>" 
-                           target="_blank" 
-                           style="display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: #1da1f2; color: white; text-decoration: none; font-size: 20px;">
+                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(SITE_URL . '/blog/' . $post['slug']); ?>&text=<?php echo urlencode($post['title']); ?>"
+                            target="_blank" title="Share on Twitter" class="share-icon twitter">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode(SITE_URL . '/blog/' . $post['slug']); ?>" 
-                           target="_blank" 
-                           style="display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: #0077b5; color: white; text-decoration: none; font-size: 20px;">
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode(SITE_URL . '/blog/' . $post['slug']); ?>"
+                            target="_blank" title="Share on LinkedIn" class="share-icon linkedin">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
@@ -171,21 +230,41 @@ if ($post['category_id']) {
                     <h2>Related Posts</h2>
                     <div class="blog-grid">
                         <?php
-                        $related_fallback = ['image-4.jpg', 'rocket.jpg', 'space.jpg'];
-                        $related_index = 0;
-
                         foreach ($related_posts as $related):
-                            // Use uploaded image if exists, otherwise fallback
-                            if ($related['featured_image'] && file_exists(UPLOAD_PATH . 'blog/' . $related['featured_image'])) {
-                                $related_image = UPLOAD_URL . '/blog/' . htmlspecialchars($related['featured_image']);
-                            } else {
-                                $related_image = ASSETS_URL . '/images/' . $related_fallback[$related_index % count($related_fallback)];
-                                $related_index++;
+                            // Check if image exists in uploads or assets
+                            $has_related_image = false;
+                            $related_image = '';
+
+                            if ($related['featured_image']) {
+                                // First check uploads folder
+                                if (file_exists(UPLOAD_PATH . 'blog/' . $related['featured_image'])) {
+                                    $has_related_image = true;
+                                    $related_image = UPLOAD_URL . '/blog/' . htmlspecialchars($related['featured_image']);
+                                }
+                                // Then check assets folder
+                                elseif (file_exists(ROOT_PATH . '/assets/images/' . $related['featured_image'])) {
+                                    $has_related_image = true;
+                                    $related_image = ASSETS_URL . '/images/' . htmlspecialchars($related['featured_image']);
+                                }
                             }
                             ?>
                             <div class="blog-card">
-                                <img class="blog-image" src="<?php echo $related_image; ?>"
-                                    alt="<?php echo htmlspecialchars($related['title']); ?>">
+                                <?php if ($has_related_image): ?>
+                                    <img class="blog-image" src="<?php echo $related_image; ?>"
+                                        alt="<?php echo htmlspecialchars($related['title']); ?>">
+                                <?php else: ?>
+                                    <div class="blog-image-placeholder" style="
+                                        height: 200px;
+                                        background: linear-gradient(135deg, var(--main-color) 0%, #ff6b6b 100%);
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 48px;
+                                        font-weight: 700;
+                                        color: rgba(255,255,255,0.9);
+                                        text-transform: uppercase;
+                                    "><?php echo strtoupper(substr($related['title'], 0, 1)); ?></div>
+                                <?php endif; ?>
 
                                 <div class="blog-content">
                                     <h3><?php echo htmlspecialchars($related['title']); ?></h3>
@@ -204,9 +283,10 @@ if ($post['category_id']) {
             <?php endif; ?>
 
             <!-- Back to Blogs -->
-            <div style="text-align: center; margin: 40px 0;">
-                <a href="<?php echo SITE_URL; ?>/blogs.php" class="btn">
-                    <img src="<?php echo ASSETS_URL; ?>/images/arrow-left-white.svg" alt="Back"> Back to All Posts
+            <div style="text-align: center; margin: 50px 0;">
+                <a href="<?php echo SITE_URL; ?>/blogs.php" class="btn"
+                    style="display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-arrow-left"></i> Back to All Posts
                 </a>
             </div>
         </div>
