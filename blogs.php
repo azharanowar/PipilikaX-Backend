@@ -15,22 +15,37 @@ $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $per_page = POSTS_PER_PAGE;
 $offset = ($page - 1) * $per_page;
 
-// Get total published posts
-$total_stmt = $pdo->query("SELECT COUNT(*) FROM blog_posts WHERE status = 'published'");
-$total_posts = $total_stmt->fetchColumn();
+// Search functionality
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$search_condition = '';
+$search_params = [];
+
+if ($search) {
+    $search_condition = " AND (p.title LIKE ? OR p.excerpt LIKE ? OR p.content LIKE ?)";
+    $search_term = "%$search%";
+    $search_params = [$search_term, $search_term, $search_term];
+}
+
+// Get total published posts (with search filter)
+$count_sql = "SELECT COUNT(*) FROM blog_posts p WHERE p.status = 'published'" . $search_condition;
+$count_stmt = $pdo->prepare($count_sql);
+$count_stmt->execute($search_params);
+$total_posts = $count_stmt->fetchColumn();
 $total_pages = ceil($total_posts / $per_page);
 
-// Get published posts
-$posts_query = "
+// Get published posts (with search filter)
+$posts_sql = "
     SELECT p.*, u.full_name as author_name, c.name as category_name
     FROM blog_posts p
     LEFT JOIN users u ON p.author_id = u.id
     LEFT JOIN categories c ON p.category_id = c.id
-    WHERE p.status = 'published'
+    WHERE p.status = 'published'" . $search_condition . "
     ORDER BY p.published_at DESC
     LIMIT $per_page OFFSET $offset
 ";
-$posts = $pdo->query($posts_query)->fetchAll();
+$posts_stmt = $pdo->prepare($posts_sql);
+$posts_stmt->execute($search_params);
+$posts = $posts_stmt->fetchAll();
 ?>
 
 <main>
@@ -39,6 +54,35 @@ $posts = $pdo->query($posts_query)->fetchAll();
             <div class="blogs-header">
                 <h1>Our Space Chronicles</h1>
                 <p>Explore the latest discoveries, missions, and wonders from across the cosmos</p>
+
+                <!-- Search Form -->
+                <form method="GET" action="" class="blog-search-form"
+                    style="margin-top: 25px; margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    <div style="position: relative; flex: 1;">
+                        <input type="text" name="search" placeholder="Search posts..."
+                            value="<?php echo htmlspecialchars($search); ?>"
+                            style="width: 100%; padding: 12px 45px 12px 15px; border: 2px solid rgba(233,3,48,0.2); border-radius: 25px; font-size: 16px; outline: none; transition: border-color 0.3s ease;"
+                            onfocus="this.style.borderColor='var(--main-color)'"
+                            onblur="this.style.borderColor='rgba(233,3,48,0.2)'">
+                        <button type="submit"
+                            style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: var(--main-color); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <?php if ($search): ?>
+                        <a href="<?php echo SITE_URL; ?>/blogs.php"
+                            style="display: flex; align-items: center; gap: 5px; padding: 12px 20px; background: #f0f0f0; color: #333; text-decoration: none; border-radius: 25px; font-size: 14px;">
+                            <i class="fas fa-times"></i> Clear
+                        </a>
+                    <?php endif; ?>
+                </form>
+
+                <?php if ($search): ?>
+                    <p style="margin-top: 15px; color: #666;">
+                        Found <strong><?php echo $total_posts; ?></strong> result(s) for
+                        "<strong><?php echo htmlspecialchars($search); ?></strong>"
+                    </p>
+                <?php endif; ?>
             </div>
 
             <?php if (count($posts) > 0): ?>
@@ -49,17 +93,40 @@ $posts = $pdo->query($posts_query)->fetchAll();
                     $img_index = 0;
 
                     foreach ($posts as $post):
-                        // Use uploaded image if exists, otherwise use fallback
-                        if ($post['featured_image'] && file_exists(UPLOAD_PATH . 'blog/' . $post['featured_image'])) {
-                            $image_src = UPLOAD_URL . '/blog/' . htmlspecialchars($post['featured_image']);
-                        } else {
-                            $image_src = ASSETS_URL . '/images/' . $fallback_images[$img_index % count($fallback_images)];
-                            $img_index++;
+                        // Check if image exists in uploads or assets
+                        $has_image = false;
+                        $image_src = '';
+
+                        if ($post['featured_image']) {
+                            // First check uploads folder
+                            if (file_exists(UPLOAD_PATH . 'blog/' . $post['featured_image'])) {
+                                $has_image = true;
+                                $image_src = UPLOAD_URL . '/blog/' . htmlspecialchars($post['featured_image']);
+                            }
+                            // Then check assets folder
+                            elseif (file_exists(ROOT_PATH . '/assets/images/' . $post['featured_image'])) {
+                                $has_image = true;
+                                $image_src = ASSETS_URL . '/images/' . htmlspecialchars($post['featured_image']);
+                            }
                         }
                         ?>
                         <div class="blog-card">
-                            <img class="blog-image" src="<?php echo $image_src; ?>"
-                                alt="<?php echo htmlspecialchars($post['title']); ?>">
+                            <?php if ($has_image): ?>
+                                <img class="blog-image" src="<?php echo $image_src; ?>"
+                                    alt="<?php echo htmlspecialchars($post['title']); ?>">
+                            <?php else: ?>
+                                <div class="blog-image-placeholder" style="
+                                    height: 200px;
+                                    background: linear-gradient(135deg, var(--main-color) 0%, #ff6b6b 100%);
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 48px;
+                                    font-weight: 700;
+                                    color: rgba(255,255,255,0.9);
+                                    text-transform: uppercase;
+                                "><?php echo strtoupper(substr($post['title'], 0, 1)); ?></div>
+                            <?php endif; ?>
 
                             <div class="blog-content">
                                 <h3><?php echo htmlspecialchars($post['title']); ?></h3>
@@ -74,10 +141,12 @@ $posts = $pdo->query($posts_query)->fetchAll();
                     <?php endforeach; ?>
                 </div>
 
-                <?php if ($total_pages > 1): ?>
+                <?php if ($total_pages > 1):
+                    $search_param = $search ? '&search=' . urlencode($search) : '';
+                    ?>
                     <div class="pagination">
                         <?php if ($page > 1): ?>
-                            <a href="?page=<?php echo $page - 1; ?>" class="pagination-btn">
+                            <a href="?page=<?php echo $page - 1; ?><?php echo $search_param; ?>" class="pagination-btn">
                                 <img src="<?php echo ASSETS_URL; ?>/images/arrow-left.svg" alt="Previous"> Previous
                             </a>
                         <?php endif; ?>
@@ -87,13 +156,14 @@ $posts = $pdo->query($posts_query)->fetchAll();
                                 <?php if ($i == $page): ?>
                                     <span class="pagination-number active"><?php echo $i; ?></span>
                                 <?php else: ?>
-                                    <a href="?page=<?php echo $i; ?>" class="pagination-number"><?php echo $i; ?></a>
+                                    <a href="?page=<?php echo $i; ?><?php echo $search_param; ?>"
+                                        class="pagination-number"><?php echo $i; ?></a>
                                 <?php endif; ?>
                             <?php endfor; ?>
                         </div>
 
                         <?php if ($page < $total_pages): ?>
-                            <a href="?page=<?php echo $page + 1; ?>" class="pagination-btn">
+                            <a href="?page=<?php echo $page + 1; ?><?php echo $search_param; ?>" class="pagination-btn">
                                 Next <img src="<?php echo ASSETS_URL; ?>/images/arrow-right.svg" alt="Next">
                             </a>
                         <?php endif; ?>
