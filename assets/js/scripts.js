@@ -1,3 +1,13 @@
+// Dynamic logo paths (can be updated from PHP)
+let logoDefault = 'assets/images/pipilika-logo.png';
+let logoWhite = 'assets/images/pipilika-logo-main-white.png';
+
+// Function to update logo sources from PHP
+function updateLogoSources(defaultPath, whitePath) {
+  logoDefault = defaultPath;
+  logoWhite = whitePath;
+}
+
 window.addEventListener('scroll', function () {
   const header = document.getElementById('headerSection');
   const logo = document.getElementById('logoImage');
@@ -5,7 +15,7 @@ window.addEventListener('scroll', function () {
 
   if (window.scrollY > 50) {
     header.classList.add('header-scrolled');
-    logo.src = 'assets/images/pipilika-logo-main-white.png'; // Change to white version
+    logo.src = logoWhite; // Use dynamic white version
     document.querySelector('.menu-toggle span').style.color = 'white !important';
 
     spans.forEach(span => {
@@ -13,7 +23,7 @@ window.addEventListener('scroll', function () {
     });
   } else {
     header.classList.remove('header-scrolled');
-    logo.src = 'assets/images/pipilika-logo.png'; // Original logo
+    logo.src = logoDefault; // Use dynamic default logo
 
     spans.forEach(span => {
       span.classList.remove('hamburger-white');

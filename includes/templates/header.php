@@ -29,6 +29,9 @@ $theme_color = '#E90330';
     <!-- Google Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon"
         href="<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_favicon); ?>">

@@ -4,9 +4,13 @@
  * PipilikaX Frontend
  */
 
-// Get navigation items from database
-$nav_items_query = $pdo->query("SELECT * FROM active_navigation ORDER BY display_order ASC");
+// Get navigation items from database (including is_cta)
+$nav_items_query = $pdo->query("SELECT * FROM navigation_menu WHERE is_active = 1 ORDER BY display_order ASC");
 $nav_items = $nav_items_query->fetchAll();
+
+// Separate regular items and CTA items
+$regular_items = array_filter($nav_items, fn($item) => !$item['is_cta']);
+$cta_items = array_filter($nav_items, fn($item) => $item['is_cta']);
 
 // Get logo
 $site_logo = getSetting('site_logo', 'pipilika-logo.png');
@@ -28,7 +32,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- Desktop Navigation -->
         <nav class="desktop-nav">
             <ul>
-                <?php foreach ($nav_items as $item): ?>
+                <?php foreach ($regular_items as $item): ?>
                     <li>
                         <a href="<?php echo SITE_URL . '/' . htmlspecialchars($item['url']); ?>" 
                            <?php if ($current_page == $item['url']) echo 'class="active"'; ?>
@@ -40,10 +44,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </ul>
         </nav>
 
-        <!-- Desktop CTA Button -->
-        <div class="desktop-btn">
-            <a href="#"><button class="btn">Join Now <img src="<?php echo ASSETS_URL; ?>/images/arrow-white.svg" /></button></a>
-        </div>
+        <!-- Desktop CTA Button(s) -->
+        <?php if (!empty($cta_items)): ?>
+            <div class="desktop-btn">
+                <?php foreach ($cta_items as $cta): ?>
+                    <a href="<?php echo htmlspecialchars($cta['url']); ?>" <?php if ($cta['target'] != '_self') echo 'target="' . htmlspecialchars($cta['target']) . '"'; ?>>
+                        <button class="btn"><?php echo htmlspecialchars($cta['title']); ?> <img src="<?php echo ASSETS_URL; ?>/images/arrow-white.svg" /></button>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
 
         <!-- Hamburger Icon -->
         <div id="menuToggle" class="menu-toggle">
@@ -57,7 +67,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div id="fullScreenMenu" class="full-screen-menu">
         <div class="close-btn" id="closeMenu">&times;</div>
         <ul>
-            <?php foreach ($nav_items as $item): ?>
+            <?php foreach ($regular_items as $item): ?>
                 <li>
                     <a href="<?php echo SITE_URL . '/' . htmlspecialchars($item['url']); ?>" 
                        <?php if ($current_page == $item['url']) echo 'class="active"'; ?>
@@ -66,22 +76,26 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </a>
                 </li>
             <?php endforeach; ?>
-            <li>
-                <a href="#"><button class="btn">Join Now <img src="<?php echo ASSETS_URL; ?>/images/arrow-white.svg" /></button></a>
-            </li>
+            <?php foreach ($cta_items as $cta): ?>
+                <li>
+                    <a href="<?php echo htmlspecialchars($cta['url']); ?>" <?php if ($cta['target'] != '_self') echo 'target="' . htmlspecialchars($cta['target']) . '"'; ?>>
+                        <button class="btn"><?php echo htmlspecialchars($cta['title']); ?> <img src="<?php echo ASSETS_URL; ?>/images/arrow-white.svg" /></button>
+                    </a>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </header>
 
 <script>
-    // Update logo source for white version
-    window.addEventListener('DOMContentLoaded', function() {
-        const logoWhite = '<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_logo_white); ?>';
-        const logoDefault = '<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_logo); ?>';
-        
-        // Update the script.js to use these variables
+    // Store logo URLs for JavaScript - will be used after scripts.js loads
+    window.pipilikaLogoDefault = '<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_logo); ?>';
+    window.pipilikaLogoWhite = '<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_logo_white); ?>';
+    
+    // Initialize logo sources when DOM is ready and scripts.js is loaded
+    document.addEventListener('DOMContentLoaded', function() {
         if (typeof updateLogoSources === 'function') {
-            updateLogoSources(logoDefault, logoWhite);
+            updateLogoSources(window.pipilikaLogoDefault, window.pipilikaLogoWhite);
         }
     });
 </script>

@@ -76,6 +76,38 @@ $map_embed = getSetting('contact_map_embed', 'https://maps.google.com/maps?q=bus
             <p><strong>Phone:</strong> <a
                     href="tel:<?php echo htmlspecialchars($contact_phone); ?>"><?php echo htmlspecialchars($contact_phone); ?></a>
             </p>
+
+            <?php
+            // Get social media URLs
+            $facebook = getSetting('facebook_url', '');
+            $twitter = getSetting('twitter_url', '');
+            $linkedin = getSetting('linkedin_url', '');
+            $github = getSetting('github_url', '');
+
+            if ($facebook || $twitter || $linkedin || $github):
+                ?>
+                <div class="contact-social" style="margin-top: 20px;">
+                    <p><strong>Follow Us:</strong></p>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <?php if ($facebook && $facebook !== '#'): ?>
+                            <a href="<?php echo htmlspecialchars($facebook); ?>" target="_blank" title="Facebook"
+                                style="font-size: 24px; color: #1877f2;"><i class="fab fa-facebook"></i></a>
+                        <?php endif; ?>
+                        <?php if ($twitter && $twitter !== '#'): ?>
+                            <a href="<?php echo htmlspecialchars($twitter); ?>" target="_blank" title="Twitter"
+                                style="font-size: 24px; color: #1da1f2;"><i class="fab fa-twitter"></i></a>
+                        <?php endif; ?>
+                        <?php if ($linkedin && $linkedin !== '#'): ?>
+                            <a href="<?php echo htmlspecialchars($linkedin); ?>" target="_blank" title="LinkedIn"
+                                style="font-size: 24px; color: #0077b5;"><i class="fab fa-linkedin"></i></a>
+                        <?php endif; ?>
+                        <?php if ($github && $github !== '#'): ?>
+                            <a href="<?php echo htmlspecialchars($github); ?>" target="_blank" title="GitHub"
+                                style="font-size: 24px; color: #333;"><i class="fab fa-github"></i></a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
 
         <!-- Contact Form -->
