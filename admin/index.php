@@ -30,6 +30,16 @@ $recent_posts = $pdo->query("
     ORDER BY p.created_at DESC
     LIMIT 5
 ")->fetchAll();
+
+// Get recent messages (for editors and admins)
+$recent_messages = [];
+if (hasPermission('editor')) {
+    $recent_messages = $pdo->query("
+        SELECT * FROM contact_messages
+        ORDER BY created_at DESC
+        LIMIT 5
+    ")->fetchAll();
+}
 ?>
 
 <div class="page-header">
@@ -121,6 +131,61 @@ $recent_posts = $pdo->query("
         </div>
     <?php endif; ?>
 </div>
+
+<!-- Recent Messages (for editors and admins) -->
+<?php if (hasPermission('editor') && count($recent_messages) > 0): ?>
+    <div class="card">
+        <div class="card-header">
+            <h3>Recent Messages <?php if ($new_messages > 0): ?><span
+                        class="badge badge-success"><?php echo $new_messages; ?> new</span><?php endif; ?></h3>
+            <a href="<?php echo ADMIN_URL; ?>/messages/index.php" class="btn btn-primary btn-sm">
+                <i class="fas fa-envelope"></i> View All Messages
+            </a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th style="width: 80px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($recent_messages as $msg): ?>
+                    <tr class="<?php echo $msg['status'] == 'new' ? 'unread-row' : ''; ?>">
+                        <td><strong><?php echo htmlspecialchars($msg['name']); ?></strong></td>
+                        <td><?php echo htmlspecialchars($msg['email']); ?></td>
+                        <td><?php echo htmlspecialchars($msg['subject'] ?: 'No subject'); ?></td>
+                        <td><?php echo formatDate($msg['created_at'], 'M j, Y'); ?></td>
+                        <td>
+                            <?php
+                            $badge_class = [
+                                'new' => 'badge-success',
+                                'read' => 'badge-info',
+                                'replied' => 'badge-warning',
+                                'archived' => 'badge-danger'
+                            ][$msg['status']] ?? 'badge-info';
+                            ?>
+                            <span class="badge <?php echo $badge_class; ?>">
+                                <?php echo ucfirst($msg['status']); ?>
+                            </span>
+                        </td>
+                        <td>
+                            <a href="<?php echo ADMIN_URL; ?>/messages/view.php?id=<?php echo $msg['id']; ?>"
+                                class="btn btn-sm btn-info" title="View">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif; ?>
 
 <!-- Quick Actions (Role-based) -->
 <div class="card">

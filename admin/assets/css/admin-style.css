@@ -104,6 +104,17 @@ body {
     text-align: center;
 }
 
+/* Sidebar Badge */
+.sidebar-badge {
+    background: var(--admin-primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
 /* ========================================
    MAIN CONTENT
    ======================================== */
@@ -471,6 +482,16 @@ textarea.form-control {
     font-size: 48px;
     margin-bottom: 15px;
     color: var(--admin-border);
+}
+
+/* Unread Message Row */
+.unread-row {
+    background-color: rgba(40, 167, 69, 0.05);
+    font-weight: 500;
+}
+
+.unread-row td:first-child {
+    border-left: 3px solid var(--admin-success);
 }
 
 /* Responsive */
