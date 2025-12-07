@@ -396,15 +396,11 @@ footer a:hover {
   left: 95%;
 }
 
-.btn:hover {
-  /* color: #000; */
-}
-
 
 
 
 header {
-  position: sticky;
+  position: relative;
   top: 0;
   width: 100%;
   z-index: 10000;
@@ -416,13 +412,15 @@ header {
   transition: all 0.3s ease;
 }
 
-/* When header becomes scrolled */
+/* When header becomes scrolled - becomes fixed */
 #headerSection.header-scrolled {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 

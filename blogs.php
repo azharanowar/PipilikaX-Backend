@@ -2,6 +2,7 @@
 /**
  * Blogs Listing Page - PipilikaX
  * Dynamic version fetching from database
+ * Supports: search, category filter, author filter, pagination
  */
 
 $page_title = 'Blogs';
@@ -15,36 +16,70 @@ $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $per_page = POSTS_PER_PAGE;
 $offset = ($page - 1) * $per_page;
 
-// Search functionality
+// Filter parameters
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$search_condition = '';
-$search_params = [];
+$category_slug = isset($_GET['category']) ? trim($_GET['category']) : '';
+$author_id = isset($_GET['author']) ? (int) $_GET['author'] : 0;
 
+// Build filter conditions and params
+$conditions = ["p.status = 'published'"];
+$params = [];
+
+// Search filter
 if ($search) {
-    $search_condition = " AND (p.title LIKE ? OR p.excerpt LIKE ? OR p.content LIKE ?)";
+    $conditions[] = "(p.title LIKE ? OR p.excerpt LIKE ? OR p.content LIKE ?)";
     $search_term = "%$search%";
-    $search_params = [$search_term, $search_term, $search_term];
+    $params[] = $search_term;
+    $params[] = $search_term;
+    $params[] = $search_term;
 }
 
-// Get total published posts (with search filter)
-$count_sql = "SELECT COUNT(*) FROM blog_posts p WHERE p.status = 'published'" . $search_condition;
+// Category filter
+$filter_category = null;
+if ($category_slug) {
+    $cat_stmt = $pdo->prepare("SELECT id, name FROM categories WHERE slug = ?");
+    $cat_stmt->execute([$category_slug]);
+    $filter_category = $cat_stmt->fetch();
+    if ($filter_category) {
+        $conditions[] = "p.category_id = ?";
+        $params[] = $filter_category['id'];
+    }
+}
+
+// Author filter
+$filter_author = null;
+if ($author_id) {
+    $author_stmt = $pdo->prepare("SELECT id, full_name FROM users WHERE id = ?");
+    $author_stmt->execute([$author_id]);
+    $filter_author = $author_stmt->fetch();
+    if ($filter_author) {
+        $conditions[] = "p.author_id = ?";
+        $params[] = $filter_author['id'];
+    }
+}
+
+// Combine conditions
+$where_clause = implode(' AND ', $conditions);
+
+// Get total published posts (with filters)
+$count_sql = "SELECT COUNT(*) FROM blog_posts p WHERE " . $where_clause;
 $count_stmt = $pdo->prepare($count_sql);
-$count_stmt->execute($search_params);
+$count_stmt->execute($params);
 $total_posts = $count_stmt->fetchColumn();
 $total_pages = ceil($total_posts / $per_page);
 
-// Get published posts (with search filter)
+// Get published posts (with filters)
 $posts_sql = "
     SELECT p.*, u.full_name as author_name, c.name as category_name
     FROM blog_posts p
     LEFT JOIN users u ON p.author_id = u.id
     LEFT JOIN categories c ON p.category_id = c.id
-    WHERE p.status = 'published'" . $search_condition . "
+    WHERE " . $where_clause . "
     ORDER BY p.published_at DESC
     LIMIT $per_page OFFSET $offset
 ";
 $posts_stmt = $pdo->prepare($posts_sql);
-$posts_stmt->execute($search_params);
+$posts_stmt->execute($params);
 $posts = $posts_stmt->fetchAll();
 ?>
 
@@ -82,6 +117,28 @@ $posts = $posts_stmt->fetchAll();
                         Found <strong><?php echo $total_posts; ?></strong> result(s) for
                         "<strong><?php echo htmlspecialchars($search); ?></strong>"
                     </p>
+                <?php endif; ?>
+
+                <?php if ($filter_category || $filter_author): ?>
+                    <div
+                        style="margin-top: 20px; margin-bottom: 25px; padding: 15px 25px; background: linear-gradient(135deg, rgba(233,3,48,0.08) 0%, rgba(255,107,107,0.08) 100%); border-radius: 12px; display: inline-flex; align-items: center; gap: 15px;">
+                        <?php if ($filter_category): ?>
+                            <span style="font-size: 16px;">
+                                <i class="fas fa-folder" style="color: var(--main-color); margin-right: 8px;"></i>
+                                Posts in <strong><?php echo htmlspecialchars($filter_category['name']); ?></strong>
+                            </span>
+                        <?php endif; ?>
+                        <?php if ($filter_author): ?>
+                            <span style="font-size: 16px;">
+                                <i class="fas fa-user" style="color: var(--main-color); margin-right: 8px;"></i>
+                                Posts by <strong><?php echo htmlspecialchars($filter_author['full_name']); ?></strong>
+                            </span>
+                        <?php endif; ?>
+                        <a href="<?php echo SITE_URL; ?>/blogs.php"
+                            style="display: inline-flex; align-items: center; gap: 5px; padding: 8px 16px; background: var(--main-color); color: white; text-decoration: none; border-radius: 20px; font-size: 13px;">
+                            <i class="fas fa-times"></i> Clear Filter
+                        </a>
+                    </div>
                 <?php endif; ?>
             </div>
 
@@ -142,11 +199,18 @@ $posts = $posts_stmt->fetchAll();
                 </div>
 
                 <?php if ($total_pages > 1):
-                    $search_param = $search ? '&search=' . urlencode($search) : '';
+                    // Build filter params for pagination links
+                    $filter_params = '';
+                    if ($search)
+                        $filter_params .= '&search=' . urlencode($search);
+                    if ($category_slug)
+                        $filter_params .= '&category=' . urlencode($category_slug);
+                    if ($author_id)
+                        $filter_params .= '&author=' . $author_id;
                     ?>
                     <div class="pagination">
                         <?php if ($page > 1): ?>
-                            <a href="?page=<?php echo $page - 1; ?><?php echo $search_param; ?>" class="pagination-btn">
+                            <a href="?page=<?php echo $page - 1; ?><?php echo $filter_params; ?>" class="pagination-btn">
                                 <img src="<?php echo ASSETS_URL; ?>/images/arrow-left.svg" alt="Previous"> Previous
                             </a>
                         <?php endif; ?>
@@ -156,14 +220,14 @@ $posts = $posts_stmt->fetchAll();
                                 <?php if ($i == $page): ?>
                                     <span class="pagination-number active"><?php echo $i; ?></span>
                                 <?php else: ?>
-                                    <a href="?page=<?php echo $i; ?><?php echo $search_param; ?>"
+                                    <a href="?page=<?php echo $i; ?><?php echo $filter_params; ?>"
                                         class="pagination-number"><?php echo $i; ?></a>
                                 <?php endif; ?>
                             <?php endfor; ?>
                         </div>
 
                         <?php if ($page < $total_pages): ?>
-                            <a href="?page=<?php echo $page + 1; ?><?php echo $search_param; ?>" class="pagination-btn">
+                            <a href="?page=<?php echo $page + 1; ?><?php echo $filter_params; ?>" class="pagination-btn">
                                 Next <img src="<?php echo ASSETS_URL; ?>/images/arrow-right.svg" alt="Next">
                             </a>
                         <?php endif; ?>

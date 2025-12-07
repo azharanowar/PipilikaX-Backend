@@ -8,26 +8,48 @@ function updateLogoSources(defaultPath, whitePath) {
   logoWhite = whitePath;
 }
 
+// Header scroll handling with anti-flicker mechanism
+let isHeaderFixed = false;
+let headerPlaceholder = null;
+
 window.addEventListener('scroll', function () {
   const header = document.getElementById('headerSection');
   const logo = document.getElementById('logoImage');
   const spans = document.querySelectorAll('.menu-toggle span');
 
-  if (window.scrollY > 50) {
+  // Use different thresholds for adding vs removing to prevent flickering
+  const scrollThreshold = 50;
+  const scrollBuffer = 10; // Buffer zone to prevent rapid toggling
+
+  const shouldBeFixed = window.scrollY > scrollThreshold;
+  const shouldBeStatic = window.scrollY < (scrollThreshold - scrollBuffer);
+
+  if (shouldBeFixed && !isHeaderFixed) {
+    // Create placeholder to prevent layout shift
+    if (!headerPlaceholder) {
+      headerPlaceholder = document.createElement('div');
+      headerPlaceholder.id = 'header-placeholder';
+      headerPlaceholder.style.height = header.offsetHeight + 'px';
+      headerPlaceholder.style.width = '100%';
+      header.parentNode.insertBefore(headerPlaceholder, header);
+    }
+
     header.classList.add('header-scrolled');
-    logo.src = logoWhite; // Use dynamic white version
-    document.querySelector('.menu-toggle span').style.color = 'white !important';
+    logo.src = logoWhite;
+    spans.forEach(span => span.classList.add('hamburger-white'));
+    isHeaderFixed = true;
 
-    spans.forEach(span => {
-      span.classList.add('hamburger-white');
-    });
-  } else {
+  } else if (shouldBeStatic && isHeaderFixed) {
+    // Remove placeholder
+    if (headerPlaceholder) {
+      headerPlaceholder.remove();
+      headerPlaceholder = null;
+    }
+
     header.classList.remove('header-scrolled');
-    logo.src = logoDefault; // Use dynamic default logo
-
-    spans.forEach(span => {
-      span.classList.remove('hamburger-white');
-    });
+    logo.src = logoDefault;
+    spans.forEach(span => span.classList.remove('hamburger-white'));
+    isHeaderFixed = false;
   }
 });
 

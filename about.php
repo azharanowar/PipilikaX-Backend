@@ -52,22 +52,27 @@ $team = $pdo->query("SELECT * FROM active_team")->fetchAll();
             <h2>Meet Our Team</h2>
             <div class="team-grid">
                 <?php
-                $team_fallback_images = ['team-1.jpg', 'team-2.jpg', 'team-3.jpg', 'team-4.jpg'];
-                $team_img_index = 0;
-
                 foreach ($team as $member):
-                    // Determine image source - uploaded or fallback
-                    if ($member['photo'] && file_exists(UPLOAD_PATH . 'team/' . $member['photo'])) {
-                        $team_image = UPLOAD_URL . '/team/' . htmlspecialchars($member['photo']);
-                    } else {
-                        // Use existing team images from assets
-                        $team_image = ASSETS_URL . '/images/' . $team_fallback_images[$team_img_index % count($team_fallback_images)];
-                        $team_img_index++;
+                    // Determine image source - check uploads first, then assets folder (like posts)
+                    $team_image = null;
+                    if ($member['photo']) {
+                        if (file_exists(UPLOAD_PATH . 'team/' . $member['photo'])) {
+                            $team_image = UPLOAD_URL . '/team/' . htmlspecialchars($member['photo']);
+                        } elseif (file_exists(ROOT_PATH . '/assets/images/' . $member['photo'])) {
+                            $team_image = ASSETS_URL . '/images/' . htmlspecialchars($member['photo']);
+                        }
                     }
                     ?>
                     <div class="team-member">
-                        <img class="team-img" src="<?php echo $team_image; ?>"
-                            alt="<?php echo htmlspecialchars($member['name']); ?> Photo">
+                        <?php if ($team_image): ?>
+                            <img class="team-img" src="<?php echo $team_image; ?>"
+                                alt="<?php echo htmlspecialchars($member['name']); ?> Photo">
+                        <?php else: ?>
+                            <div class="team-img team-img-placeholder"
+                                style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%); color: #999; font-size: 48px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        <?php endif; ?>
 
                         <h3><?php echo htmlspecialchars($member['name']); ?></h3>
                         <p><?php echo htmlspecialchars($member['position']); ?></p>

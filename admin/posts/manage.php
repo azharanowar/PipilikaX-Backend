@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $slug = sanitize($_POST['slug'] ?? '');
     $excerpt = sanitize($_POST['excerpt'] ?? '');
     $content = $_POST['content'] ?? ''; // Don't sanitize - TinyMCE handles this
-    $category_id = $_POST['category_id'] ?? null;
+    $category_id = !empty($_POST['category_id']) ? (int) $_POST['category_id'] : null;
     $status = $_POST['status'] ?? 'draft';
 
     // Validation

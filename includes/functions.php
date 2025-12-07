@@ -134,30 +134,83 @@ function createSlug($text)
 }
 
 /**
- * Upload image
+ * Upload image with security validation
+ * Validates both extension AND actual file content (MIME type)
  */
 function uploadImage($file, $folder = 'blog')
 {
-    $allowed = ALLOWED_IMAGE_TYPES;
+    $allowed_extensions = ALLOWED_IMAGE_TYPES;
+    $allowed_mimes = [
+        'jpg' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'png' => 'image/png',
+        'gif' => 'image/gif',
+        'webp' => 'image/webp'
+    ];
+
     $filename = $file['name'];
     $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-    if (!in_array($ext, $allowed)) {
-        return ['success' => false, 'message' => 'Invalid file type. Allowed: ' . implode(', ', $allowed)];
+    // Check extension first
+    if (!in_array($ext, $allowed_extensions)) {
+        return ['success' => false, 'message' => 'Invalid file type. Allowed: ' . implode(', ', $allowed_extensions)];
     }
 
+    // Check file size
     if ($file['size'] > MAX_FILE_SIZE) {
         return ['success' => false, 'message' => 'File too large. Maximum size: ' . (MAX_FILE_SIZE / 1024 / 1024) . 'MB'];
     }
 
+    // Validate actual file content using getimagesize()
+    // This checks if the file is a real image, not just a renamed file
+    $image_info = @getimagesize($file['tmp_name']);
+    if ($image_info === false) {
+        return ['success' => false, 'message' => 'Invalid image file. The file content does not match a valid image format.'];
+    }
+
+    // Verify MIME type matches what we expect for this extension
+    $detected_mime = $image_info['mime'];
+    $expected_mime = $allowed_mimes[$ext] ?? null;
+
+    if (!$expected_mime || $detected_mime !== $expected_mime) {
+        // Allow jpeg to have either extension
+        if (
+            !($ext === 'jpg' && $detected_mime === 'image/jpeg') &&
+            !($ext === 'jpeg' && $detected_mime === 'image/jpeg')
+        ) {
+            return ['success' => false, 'message' => 'File content does not match the file extension. Please upload a genuine image file.'];
+        }
+    }
+
+    // Ensure upload directory exists
+    $upload_dir = UPLOAD_PATH . $folder . '/';
+    if (!is_dir($upload_dir)) {
+        if (!mkdir($upload_dir, 0755, true)) {
+            return ['success' => false, 'message' => 'Could not create upload directory. Please check server permissions.'];
+        }
+    }
+
+    // Check if directory is writable
+    if (!is_writable($upload_dir)) {
+        return ['success' => false, 'message' => 'Upload directory is not writable. Please check folder permissions.'];
+    }
+
     $newname = uniqid() . '_' . time() . '.' . $ext;
-    $destination = UPLOAD_PATH . $folder . '/' . $newname;
+    $destination = $upload_dir . $newname;
 
     if (move_uploaded_file($file['tmp_name'], $destination)) {
         return ['success' => true, 'filename' => $newname];
     }
 
-    return ['success' => false, 'message' => 'Upload failed'];
+    // More detailed error for debugging
+    $error_msg = 'Upload failed.';
+    if (!file_exists($file['tmp_name'])) {
+        $error_msg = 'Temporary file not found. The file may be too large for PHP settings.';
+    } elseif (!is_uploaded_file($file['tmp_name'])) {
+        $error_msg = 'Invalid upload detected.';
+    }
+
+    return ['success' => false, 'message' => $error_msg];
 }
 
 /**

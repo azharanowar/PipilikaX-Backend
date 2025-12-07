@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_member'])) {
             $errors[] = 'Position is required.';
         }
 
-        // Handle photo upload
-        $photo_filename = $_POST['existing_photo'] ?? '';
+        // Handle photo upload - use null when no photo (not empty string)
+        $photo_filename = !empty($_POST['existing_photo']) ? $_POST['existing_photo'] : null;
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $upload_result = uploadImage($_FILES['photo'], 'team');
             if ($upload_result['success']) {
@@ -208,6 +208,8 @@ $team_fallback_images = ['team-1.jpg', 'team-2.jpg', 'team-3.jpg', 'team-4.jpg']
                     <img src="<?php
                     if (file_exists(UPLOAD_PATH . 'team/' . $edit_member['photo'])) {
                         echo UPLOAD_URL . '/team/' . htmlspecialchars($edit_member['photo']);
+                    } elseif (file_exists(ROOT_PATH . '/assets/images/' . $edit_member['photo'])) {
+                        echo ASSETS_URL . '/images/' . htmlspecialchars($edit_member['photo']);
                     } else {
                         echo ASSETS_URL . '/images/' . $team_fallback_images[0];
                     }
@@ -287,20 +289,28 @@ $team_fallback_images = ['team-1.jpg', 'team-2.jpg', 'team-3.jpg', 'team-4.jpg']
             </thead>
             <tbody>
                 <?php
-                $img_index = 0;
                 foreach ($members as $member):
-                    // Determine image source
-                    if ($member['photo'] && file_exists(UPLOAD_PATH . 'team/' . $member['photo'])) {
-                        $member_image = UPLOAD_URL . '/team/' . htmlspecialchars($member['photo']);
-                    } else {
-                        $member_image = ASSETS_URL . '/images/' . $team_fallback_images[$img_index % count($team_fallback_images)];
-                        $img_index++;
+                    // Determine image source - check uploads first, then assets folder
+                    $member_image = null;
+                    if ($member['photo']) {
+                        if (file_exists(UPLOAD_PATH . 'team/' . $member['photo'])) {
+                            $member_image = UPLOAD_URL . '/team/' . htmlspecialchars($member['photo']);
+                        } elseif (file_exists(ROOT_PATH . '/assets/images/' . $member['photo'])) {
+                            $member_image = ASSETS_URL . '/images/' . htmlspecialchars($member['photo']);
+                        }
                     }
                     ?>
                     <tr>
                         <td>
-                            <img src="<?php echo $member_image; ?>" alt="<?php echo htmlspecialchars($member['name']); ?>"
-                                style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                            <?php if ($member_image): ?>
+                                <img src="<?php echo $member_image; ?>" alt="<?php echo htmlspecialchars($member['name']); ?>"
+                                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                            <?php else: ?>
+                                <div
+                                    style="width: 50px; height: 50px; border-radius: 8px; background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%); display: flex; align-items: center; justify-content: center; color: #999;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            <?php endif; ?>
                         </td>
                         <td><strong><?php echo htmlspecialchars($member['name']); ?></strong></td>
                         <td><?php echo htmlspecialchars($member['position']); ?></td>

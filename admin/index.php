@@ -56,20 +56,26 @@ if (hasPermission('editor')) {
         <div class="stat-value"><?php echo $total_posts; ?></div>
     </div>
 
-    <div class="stat-card" style="border-left-color: #ffc107;">
-        <h4>Draft Posts</h4>
-        <div class="stat-value" style="color: #ffc107;"><?php echo $draft_posts; ?></div>
-    </div>
+    <?php if (hasPermission('author')): ?>
+        <div class="stat-card" style="border-left-color: #ffc107;">
+            <h4>Draft Posts</h4>
+            <div class="stat-value" style="color: #ffc107;"><?php echo $draft_posts; ?></div>
+        </div>
+    <?php endif; ?>
 
-    <div class="stat-card" style="border-left-color: #28a745;">
-        <h4>New Messages</h4>
-        <div class="stat-value" style="color: #28a745;"><?php echo $new_messages; ?></div>
-    </div>
+    <?php if (hasPermission('editor')): ?>
+        <div class="stat-card" style="border-left-color: #28a745;">
+            <h4>New Messages</h4>
+            <div class="stat-value" style="color: #28a745;"><?php echo $new_messages; ?></div>
+        </div>
+    <?php endif; ?>
 
-    <div class="stat-card" style="border-left-color: #17a2b8;">
-        <h4>Total Views</h4>
-        <div class="stat-value" style="color: #17a2b8;"><?php echo number_format($total_views); ?></div>
-    </div>
+    <?php if (hasPermission('author')): ?>
+        <div class="stat-card" style="border-left-color: #17a2b8;">
+            <h4>Total Views</h4>
+            <div class="stat-value" style="color: #17a2b8;"><?php echo number_format($total_views); ?></div>
+        </div>
+    <?php endif; ?>
 </div>
 
 <!-- Recent Posts -->

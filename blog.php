@@ -94,10 +94,12 @@ if ($post['category_id']) {
             <article class="blog-single">
                 <div class="blog-hero">
                     <?php if ($post['category_name']): ?>
-                        <span class="blog-category"
-                            style="display: inline-block; background: #E90330; color: white; padding: 5px 15px; border-radius: 20px; margin-bottom: 15px; font-size: 14px;">
+                        <a href="<?php echo SITE_URL; ?>/blogs.php?category=<?php echo urlencode($post['category_slug']); ?>"
+                            class="blog-category"
+                            style="display: inline-block; background: #E90330; color: white; padding: 5px 15px; border-radius: 20px; margin-bottom: 15px; font-size: 14px; text-decoration: none; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='#c4022a'" onmouseout="this.style.background='#E90330'">
                             <?php echo htmlspecialchars($post['category_name']); ?>
-                        </span>
+                        </a>
                     <?php endif; ?>
 
                     <h1 class="blog-title" style="font-size: 2.5em; margin: 10px 0;">
@@ -107,7 +109,13 @@ if ($post['category_id']) {
                     <div class="blog-meta"
                         style="display: flex; gap: 20px; margin: 15px 0; color: #666; font-size: 14px;">
                         <span>
-                            <strong>By:</strong> <?php echo htmlspecialchars($post['author_name'] ?? 'Admin'); ?>
+                            <strong>By:</strong>
+                            <a href="<?php echo SITE_URL; ?>/blogs.php?author=<?php echo $post['author_id']; ?>"
+                                style="color: var(--main-color); text-decoration: none;"
+                                onmouseover="this.style.textDecoration='underline'"
+                                onmouseout="this.style.textDecoration='none'">
+                                <?php echo htmlspecialchars($post['author_name'] ?? 'Admin'); ?>
+                            </a>
                         </span>
                         <span>
                             <strong>Date:</strong>
@@ -139,20 +147,29 @@ if ($post['category_id']) {
 
                 <!-- Author Box -->
                 <?php if ($post['author_name']): ?>
-                    <div
-                        style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin: 40px 0; display: flex; align-items: center; gap: 20px;">
-                        <div
-                            style="width: 60px; height: 60px; border-radius: 50%; background: #E90330; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">
-                            <?php echo strtoupper(substr($post['author_name'], 0, 1)); ?>
+                    <a href="<?php echo SITE_URL; ?>/blogs.php?author=<?php echo $post['author_id']; ?>"
+                        style="text-decoration: none; color: inherit;">
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin: 40px 0; display: flex; align-items: center; gap: 20px; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='#f0f1f2'; this.style.transform='translateX(5px)'"
+                            onmouseout="this.style.background='#f8f9fa'; this.style.transform='translateX(0)'">
+                            <div
+                                style="width: 60px; height: 60px; border-radius: 50%; background: #E90330; color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">
+                                <?php echo strtoupper(substr($post['author_name'], 0, 1)); ?>
+                            </div>
+                            <div>
+                                <h4 style="margin: 0 0 5px 0;">Written by
+                                    <?php echo htmlspecialchars($post['author_name']); ?>
+                                    <i class="fas fa-arrow-right"
+                                        style="font-size: 12px; margin-left: 8px; color: var(--main-color);"></i>
+                                </h4>
+                                <?php if ($post['author_bio']): ?>
+                                    <p style="margin: 0; color: #666;"><?php echo htmlspecialchars($post['author_bio']); ?></p>
+                                <?php endif; ?>
+                                <p style="margin: 5px 0 0 0; font-size: 13px; color: var(--main-color);">View all posts by
+                                    this author</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 style="margin: 0 0 5px 0;">Written by <?php echo htmlspecialchars($post['author_name']); ?>
-                            </h4>
-                            <?php if ($post['author_bio']): ?>
-                                <p style="margin: 0; color: #666;"><?php echo htmlspecialchars($post['author_bio']); ?></p>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+                    </a>
                 <?php endif; ?>
 
                 <!-- Share Buttons -->
