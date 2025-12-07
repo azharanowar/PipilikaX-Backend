@@ -129,23 +129,42 @@ PipilikaX-Backend/
 
 ## 📸 Screenshots
 
-### Home Page  
-![Home Page](screenshots/home.png)
+### Public Website
 
-### Blog Listing  
-![Blog Listing](screenshots/blog-archive.png)
+#### Home Page  
+![Home Page](screenshots/screencapture-localhost-PipilikaX-Backend-2025-12-07-21_34_17.png)
 
-### Blog Post  
-![Blog Post](screenshots/blog-single.png)
+#### Blog Listing  
+![Blog Listing](screenshots/screencapture-localhost-PipilikaX-Backend-blogs-php-2025-12-07-21_34_37.png)
 
-### About Page  
-![About Page](screenshots/about-us.png)
+#### Blog Post  
+![Blog Post](screenshots/screencapture-localhost-PipilikaX-Backend-blog-the-future-of-mars-exploration-2025-12-07-21_34_55.png)
 
-### Contact Page  
-![Contact Page](screenshots/contact-us.png)
+#### About Page  
+![About Page](screenshots/screencapture-localhost-PipilikaX-Backend-about-php-2025-12-07-21_35_11.png)
 
-### 404 Page  
-![404 Error Page](screenshots/404.png)
+#### Contact Page  
+![Contact Page](screenshots/screencapture-localhost-PipilikaX-Backend-contact-php-2025-12-07-21_35_22.png)
+
+### Admin Panel
+
+#### Login Page
+![Admin Login](screenshots/screencapture-localhost-PipilikaX-Backend-admin-login-php-2025-12-07-21_35_38.png)
+
+#### Dashboard
+![Admin Dashboard](screenshots/screencapture-localhost-PipilikaX-Backend-admin-index-php-2025-12-07-21_36_23.png)
+
+#### Posts Management
+![Admin Posts](screenshots/screencapture-localhost-PipilikaX-Backend-admin-posts-index-php-2025-12-07-21_36_35.png)
+
+#### Team Management
+![Admin Team](screenshots/screencapture-localhost-PipilikaX-Backend-admin-team-index-php-2025-12-07-21_36_48.png)
+
+#### Site Settings
+![Admin Settings](screenshots/screencapture-localhost-PipilikaX-Backend-admin-settings-index-php-2025-12-07-21_37_07.png)
+
+#### User Management
+![Admin Users](screenshots/screencapture-localhost-PipilikaX-Backend-admin-users-index-php-2025-12-07-21_37_19.png)
 
 ---
 
