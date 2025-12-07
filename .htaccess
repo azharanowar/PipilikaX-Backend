@@ -5,8 +5,11 @@ Options -Indexes
 RewriteEngine On
 RewriteBase /PipilikaX-Backend/
 
-# Blog post pretty URLs - must come before .php removal
-RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog.php?slug=$1 [L,QSA]
+# Custom 404 error page
+ErrorDocument 404 /PipilikaX-Backend/404.php
+
+# Blog post pretty URLs - match any characters, let blog.php validate
+RewriteRule ^blog/(.+)$ blog.php?slug=$1 [L,QSA]
 
 # Remove .php extension
 RewriteCond %{REQUEST_FILENAME} !-d

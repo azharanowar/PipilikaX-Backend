@@ -211,7 +211,7 @@ $posts = $posts_stmt->fetchAll();
                     <div class="pagination">
                         <?php if ($page > 1): ?>
                             <a href="?page=<?php echo $page - 1; ?><?php echo $filter_params; ?>" class="pagination-btn">
-                                <img src="<?php echo ASSETS_URL; ?>/images/arrow-left.svg" alt="Previous"> Previous
+                                <i class="fas fa-arrow-left"></i> Previous
                             </a>
                         <?php endif; ?>
 
@@ -228,7 +228,7 @@ $posts = $posts_stmt->fetchAll();
 
                         <?php if ($page < $total_pages): ?>
                             <a href="?page=<?php echo $page + 1; ?><?php echo $filter_params; ?>" class="pagination-btn">
-                                Next <img src="<?php echo ASSETS_URL; ?>/images/arrow-right.svg" alt="Next">
+                                Next <i class="fas fa-arrow-right"></i>
                             </a>
                         <?php endif; ?>
                     </div>
