@@ -1,79 +1,136 @@
-# PipilikaX 🚀
+# PipilikaX Backend 🚀
 
-**PipilikaX** is a space, astronaut, astronomy related informational responsive web design project that delivers educational content and real-time space data in an engaging, interactive format. I design the project for learning and practice purpose with HTML5, CSS3 and JavaScript ES6 and DOM manipulation.
-
-🌐 [Live Site](https://azharanowar.github.io/pipilikaX)
+**PipilikaX** is a full-stack PHP web application for a space and astronomy-themed blog/content management system. This project features a complete admin panel with user management, blog posts, team members, categories, and more.
 
 ---
 
-## 📁 Pages & Features
+## ✨ Features
 
-### 🏠 Home
-- Animated **starfield** hero section (Canvas API).
-- "About PipilikaX" intro section.
-- Visual **solar system lineup**.
-- **NASA Image of the Day** with live API and description.
-- PipilikaX **carousel engine**: showcases modules or tools.
-- **Live ISS Tracker**: real-time map using iframe.
-- **Adventure Parallax Section** with a Mars-style image.
-- "Learn More" call-to-action gallery.
-- Custom **cursor animation** and **scroll-to-top** button.
+### 🌐 Public Website
+- **Home Page**: Animated starfield hero, solar system lineup, NASA Image of the Day API, ISS tracker
+- **Blog Listing**: Filter posts by category or author, responsive grid layout with pagination
+- **Blog Single**: Pretty URLs (`/blog/post-slug`), related posts, social sharing, author box
+- **About Page**: Mission statement, dynamic team member profiles
+- **Contact Page**: Contact form with database storage, embedded map
+- **404 Page**: Animated space background with floating astronaut
 
-### 📝 Blog Listing
-- Responsive card layout using **CSS Grid**.
-- Blog cards with thumbnail, summary, and Read More link.
+### 🔐 Admin Panel
+- **Dashboard**: Role-based statistics (posts, views, messages)
+- **Posts Management**: Create, edit, delete posts with TinyMCE editor, featured images, categories
+- **Categories**: Full CRUD for post categories with slug auto-generation
+- **Team Members**: Manage team with photo uploads, roles, social links
+- **Messages**: View and manage contact form submissions
+- **Users**: User management with role-based permissions (Admin, Editor, Author, Subscriber)
+- **Site Settings**: Configure site name, tagline, logo, social links, footer text
 
-### 📖 Blog Single Post
-- Full-width hero image.
-- Blog title, author, date, body content.
-- Navigation and styled share buttons.
-
-### 👨‍🚀 About Page
-- Mission statement repeated from home.
-- **Meet the Team**: Grid of styled member profiles with hover social links.
-
-### ✉️ Contact Page
-- Contact form with name, email, and message.
-- Embedded **satellite map** iframe.
-- Fully responsive design.
-
-### ❌ 404 Page
-- Full-width animated starfield background.
-- Floating astronaut graphic.
-- Large `404` with "Lost in Space" message.
-- Button to return home.
+### 🛡️ Security Features
+- Password hashing with bcrypt
+- Session-based authentication with role permissions
+- CSRF protection on forms
+- Image upload validation (extension + MIME type)
+- SQL injection prevention with prepared statements
+- XSS protection with output escaping
+- Production error handling (errors logged, not displayed)
 
 ---
 
 ## 🛠️ Technologies Used
 
-- HTML5
-- CSS3 (Flexbox, Grid, Animations)
-- JavaScript (Vanilla, Canvas API)
-- Responsive Design Principles
-- External APIs and Iframes
+- **Backend**: PHP 8.x, PDO/MySQL
+- **Frontend**: HTML5, CSS3 (Flexbox, Grid, Animations), JavaScript ES6
+- **Database**: MySQL with views for common queries
+- **Rich Text Editor**: TinyMCE 6
+- **Icons**: Font Awesome 6
+- **APIs**: NASA APOD, ISS Tracker iframe
+
+---
+
+## 📁 Project Structure
+
+```
+PipilikaX-Backend/
+├── admin/                  # Admin panel
+│   ├── assets/             # Admin-specific CSS/JS
+│   ├── includes/           # Sidebar, header, footer
+│   ├── posts/              # Post management
+│   ├── categories/         # Category management
+│   ├── team/               # Team member management
+│   ├── messages/           # Contact messages
+│   ├── users/              # User management
+│   └── settings/           # Site settings
+├── assets/                 # Public CSS, JS, images
+├── config/                 # Database & constants
+├── database/               # SQL schema files
+├── includes/               # Shared PHP (functions, templates)
+├── uploads/                # User-uploaded files
+└── [public pages].php      # Home, blog, about, contact, 404
+```
 
 ---
 
 ## 🚀 Getting Started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/azharanowar/pipilikaX.git
-   cd pipilikaX
-   ```
-2. Open `index.html` using any live server or drag it into your browser.
+### Prerequisites
+- PHP 8.0+
+- MySQL 5.7+ or MariaDB
+- Apache with mod_rewrite (XAMPP, MAMP, or similar)
 
-3. Or [visit the GitHub Pages deployment](https://azharanowar.github.io/pipilikaX)
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/azharanowar/PipilikaX-Backend.git
+   ```
+
+2. **Move to your web server directory:**
+   ```bash
+   mv PipilikaX-Backend /path/to/htdocs/
+   ```
+
+3. **Create the database:**
+   - Create a MySQL database named `pipilikax_db`
+   - Import the schema: `database/pipilikax_complete.sql`
+
+4. **Configure database connection:**
+   - Edit `config/constants.php` with your database credentials:
+   ```php
+   define('DB_HOST', 'localhost');
+   define('DB_NAME', 'pipilikax_db');
+   define('DB_USER', 'root');
+   define('DB_PASS', '');
+   ```
+
+5. **Create uploads and logs directories:**
+   ```bash
+   mkdir -p uploads/blog uploads/team uploads/settings logs
+   chmod 755 uploads logs
+   ```
+
+6. **Access the site:**
+   - Public: `http://localhost/PipilikaX-Backend/`
+   - Admin: `http://localhost/PipilikaX-Backend/admin/`
+
+### Default Admin Login
+- **Email**: `admin@pipilikax.com`
+- **Password**: `password123`
+
+---
+
+## 👥 User Roles
+
+| Role | Permissions |
+|------|-------------|
+| **Admin** | Full access to all features |
+| **Editor** | Manage all posts, categories, messages |
+| **Author** | Create and manage own posts |
+| **Subscriber** | View dashboard only |
 
 ---
 
 ## 📸 Screenshots
 
-> Store all screenshots in a `/screenshots/` folder and link them like below:
-
 ### Home Page  
-![Home Page Screenshot](screenshots/home.png)
+![Home Page](screenshots/home.png)
 
 ### Blog Listing  
 ![Blog Listing](screenshots/blog-archive.png)
@@ -92,17 +149,30 @@
 
 ---
 
+## 🔧 Configuration
+
+### Debug Mode
+In `config/constants.php`:
+```php
+define('DEBUG_MODE', false);  // Set to true for development
+```
+
+### Site URL
+Update `SITE_URL` in `config/constants.php` for your domain.
+
+---
+
 ## 📄 License
 
-Open-source for exploration and educational purposes.
+Open-source for educational and learning purposes.
 
 ---
 
 ## 👨‍💻 Author
 
 Developed with ❤️ by [Azhar Anowar](https://github.com/azharanowar)  
-Feedback and contributions are welcome. Submit an issue or PR!
+Feedback and contributions are welcome!
 
 ---
 
-🛰️ *“Explore the cosmos—one scroll at a time.”*
+🛰️ *"Explore the cosmos—one scroll at a time."*
