@@ -13,7 +13,7 @@ require_once __DIR__ . '/includes/templates/navigation.php';
 
 // Get dynamic content from settings
 $hero_welcome = getSetting('hero_welcome_title', 'Welcome to PipilikaX');
-$hero_intro = getSetting('hero_intro_text', 'Adventures beyond the stars, adrenaline that defies gravity – welcome to:');
+$hero_intro = getSetting('hero_intro_text', 'Adventures beyond the stars, adrenaline that defies gravity - welcome to:');
 $hero_cta = getSetting('hero_cta_text', 'Join the Journey');
 $hero_cta_url = getSetting('hero_cta_url', '#');
 

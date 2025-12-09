@@ -431,9 +431,8 @@ $csrf_token = generateCSRFToken();
                                 <textarea id="<?php echo $setting['setting_key']; ?>"
                                     name="settings[<?php echo $setting['setting_key']; ?>]" class="form-control"
                                     rows="4"><?php echo htmlspecialchars($setting['setting_value']); ?></textarea>
-                                <?php break; ?>
-
-                            <?php case 'image': ?>
+                                <?php break;
+                            case 'image': ?>
                                 <?php if ($setting['setting_value']): ?>
                                     <div style="margin-bottom: 10px;">
                                         <?php
@@ -462,9 +461,8 @@ $csrf_token = generateCSRFToken();
                                     name="settings_images[<?php echo $setting['setting_key']; ?>]" class="form-control"
                                     accept="image/*">
                                 <small style="color: #666;">Leave empty to keep current image</small>
-                                <?php break; ?>
-
-                            <?php case 'boolean': ?>
+                                <?php break;
+                            case 'boolean': ?>
                                 <div style="padding-top: 5px;">
                                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                                         <input type="checkbox" name="settings[<?php echo $setting['setting_key']; ?>]" value="1"
@@ -472,22 +470,19 @@ $csrf_token = generateCSRFToken();
                                         <span>Enabled</span>
                                     </label>
                                 </div>
-                                <?php break; ?>
-
-                            <?php case 'number': ?>
+                                <?php break;
+                            case 'number': ?>
                                 <input type="number" id="<?php echo $setting['setting_key']; ?>"
                                     name="settings[<?php echo $setting['setting_key']; ?>]" class="form-control"
                                     value="<?php echo htmlspecialchars($setting['setting_value']); ?>">
-                                <?php break; ?>
-
-                            <?php case 'url': ?>
+                                <?php break;
+                            case 'url': ?>
                                 <input type="url" id="<?php echo $setting['setting_key']; ?>"
                                     name="settings[<?php echo $setting['setting_key']; ?>]" class="form-control"
                                     value="<?php echo htmlspecialchars($setting['setting_value']); ?>"
                                     placeholder="https://...">
-                                <?php break; ?>
-
-                            <?php default: ?>
+                                <?php break;
+                            default: ?>
                                 <input type="text" id="<?php echo $setting['setting_key']; ?>"
                                     name="settings[<?php echo $setting['setting_key']; ?>]" class="form-control"
                                     value="<?php echo htmlspecialchars($setting['setting_value']); ?>">

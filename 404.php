@@ -94,7 +94,7 @@ http_response_code(404);
     </main>
     <footer>
         <a href="https://github.com/azharanowar/pipilikaX" target="_blank"><strong>PipilikaX</strong></a> || Copyright ©
-        2025 – All rights reserved.
+        2025 - All rights reserved.
     </footer>
 
     <div class="cursor-dot"></div>
