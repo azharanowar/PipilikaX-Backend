@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2025 at 01:31 PM
+-- Generation Time: Dec 13, 2025 at 05:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -180,7 +180,67 @@ INSERT INTO `activity_log` (`id`, `user_id`, `action`, `entity_type`, `entity_id
 (92, 1, 'delete', 'category', 7, 'Deleted category', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 12:05:42'),
 (93, 1, 'delete', 'category', 6, 'Deleted category', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 12:05:47'),
 (94, 1, 'update', 'blog_post', 10, 'Updated post: esdc n lm dka.아', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 12:24:10'),
-(95, 1, 'update', 'blog_post', 10, 'Updated post: esdc n lm dka.아', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 12:24:55');
+(95, 1, 'update', 'blog_post', 10, 'Updated post: esdc n lm dka.아', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 12:24:55'),
+(96, 1, 'login', 'user', 1, 'User logged in', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 12:35:51'),
+(97, 1, 'login', 'user', 1, 'User logged in', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 13:51:24'),
+(98, 1, 'create', 'team_member', 13, 'Created team member: sa', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 13:55:22'),
+(99, 1, 'update', 'navigation', 5, 'Toggled menu item visibility', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 13:59:35'),
+(100, 1, 'update', 'navigation', 5, 'Toggled menu item visibility', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 13:59:38'),
+(101, 1, 'create', 'navigation', 7, 'Added menu item: Bal chal', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 14:00:31'),
+(102, 1, 'login', 'user', 1, 'User logged in', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-09 16:20:18'),
+(103, 1, 'login', 'user', 1, 'User logged in', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:53:54'),
+(104, 1, 'create', 'blog_post', 14, 'Created post: dsa123 # 3 23*83012 _ -123123sasAs!!!', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:55:00'),
+(105, 1, 'update', 'blog_post', 14, 'Updated post: dsa123 # 3 23*83012 _ -123123sasAs!!!', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:55:10'),
+(106, 1, 'update', 'blog_post', 14, 'Updated post: dsa123 # 3 23*83012 _ -123123sasAs!!!', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:55:35'),
+(107, 1, 'create', 'category', 8, 'Created category: dsa123 # 3 23*83012 _ -123123sasAs!!!', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:56:16'),
+(108, 1, 'update', 'blog_post', 14, 'Updated post: dsa123 # 3 23*83012 _ -123123sasAs!!!', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:56:32'),
+(109, 1, 'create', 'category', 9, 'Created category: dsa123 # 3 23*83012 _ -123123sasAs!!!', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:57:01'),
+(110, 1, 'update', 'blog_post', 9, 'Updated post: gybyuhj', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:57:21'),
+(111, 1, 'update', 'user', 3, 'Toggled user status', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:58:12'),
+(112, 1, 'update', 'user', 3, 'Toggled user status', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-12 14:58:25'),
+(113, 1, 'login', 'user', 1, 'User logged in', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 14:31:12'),
+(114, 1, 'create', 'blog_post', 15, 'Created post: asdasdxe312edw21313131344444#n 8273213%1931 13413', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 14:32:12'),
+(115, 1, 'update', 'blog_post', 15, 'Updated post: asdasdxe312edw21313131344444#n 8273213%1931 13413', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 14:32:31'),
+(116, 1, 'update', 'blog_post', 15, 'Updated post: asdasdxe312edw21313131344444#n 8273213%1931 13413', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 14:33:14'),
+(117, 1, 'create', 'team_member', 14, 'Created team member: saxa231312####', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 14:35:44'),
+(118, 1, 'create', 'blog_post', 16, 'Created post: cdsaad@@@d qwdqwed3232@#@@ ^%^&amp;', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 14:38:05'),
+(119, 1, 'update', 'blog_post', 16, 'Updated post: cdsaad@@@d qwdqwed3232@#@@ ^%^&amp;amp;', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 14:38:12'),
+(120, 1, 'update', 'blog_post', 16, 'Updated post: cdsaad@@@d qwdqwed3232@#@@ ^%^&amp;amp;amp;', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:15:36'),
+(121, 1, 'update', 'blog_post', 15, 'Updated post: asdasdxe312edw21313131344444#n 8273213%1931 13413', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:15:58'),
+(122, 1, 'update', 'blog_post', 14, 'Updated post: dsa123 # 3 23*83012 _ -123123sasAs!!!', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:16:14'),
+(123, 1, 'update', 'blog_post', 13, 'Updated post: ;qiwer', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:16:19'),
+(124, 1, 'update', 'blog_post', 12, 'Updated post: aodi', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:16:22'),
+(125, 1, 'update', 'blog_post', 11, 'Updated post: efavjkd nvkjnadfnvkj d', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:16:47'),
+(126, 1, 'update', 'blog_post', 10, 'Updated post: esdc n lm dka.아', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:16:51'),
+(127, 1, 'update', 'blog_post', 9, 'Updated post: gybyuhj', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:16:56'),
+(128, 1, 'update', 'blog_post', 8, 'Updated post: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:17:02'),
+(129, 1, 'update', 'blog_post', 7, 'Updated post: Something something', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:17:46'),
+(130, 1, 'update', 'blog_post', 15, 'Updated post: asdasdxe312edw21313131344444#n 8273213%1931 13413', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:18:02'),
+(131, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:20:57'),
+(132, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:21:29'),
+(133, 1, 'update', 'settings', NULL, 'Updated contact settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:23:39'),
+(134, 1, 'update', 'settings', NULL, 'Updated contact settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:23:56'),
+(135, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:25:24'),
+(136, 1, 'delete', 'settings', NULL, 'Deleted image for site_logo_white', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:26:02'),
+(137, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:26:02'),
+(138, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:26:52'),
+(139, 1, 'update', 'settings', NULL, 'Updated homepage settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:29:03'),
+(140, 1, 'update', 'settings', NULL, 'Updated homepage settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:29:48'),
+(141, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:30:33'),
+(142, 1, 'delete', 'settings', NULL, 'Deleted image for site_logo', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:30:43'),
+(143, 1, 'delete', 'settings', NULL, 'Deleted image for site_logo_white', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:30:43'),
+(144, 1, 'delete', 'settings', NULL, 'Deleted image for site_favicon', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:30:43'),
+(145, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:30:43'),
+(146, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:31:27'),
+(147, 1, 'update', 'settings', NULL, 'Updated general settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:31:55'),
+(148, 1, 'update', 'settings', NULL, 'Updated footer settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:34:20'),
+(149, 1, 'update', 'settings', NULL, 'Updated footer settings', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:34:45'),
+(150, 1, 'create', 'user', 10, 'Created user: alrafi', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:35:52'),
+(151, 1, 'update', 'team_member', 14, 'Updated team member: asdcas231312####', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:37:09'),
+(152, 1, 'delete', 'team_member', 14, 'Deleted team member', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:37:16'),
+(153, 1, 'update', 'team_member', 13, 'Updated team member: Test team', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:37:34'),
+(154, 1, 'update', 'team_member', 13, 'Updated team member: Test team', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:38:30'),
+(155, 1, 'update', 'team_member', 13, 'Updated team member: Test team', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-13 15:41:35');
 
 -- --------------------------------------------------------
 
@@ -210,19 +270,22 @@ CREATE TABLE `blog_posts` (
 --
 
 INSERT INTO `blog_posts` (`id`, `title`, `slug`, `excerpt`, `content`, `featured_image`, `author_id`, `category_id`, `status`, `views`, `allow_comments`, `created_at`, `updated_at`, `published_at`) VALUES
-(1, 'Webb Sees Sombrero Galaxy in Near-Infrared', 'webb-sees-sombrero-galaxy-in-near-infrared', 'NASA&#039;s James Webb Space Telescope recently imaged the Sombrero Galaxy with its NIRCam, revealing stunning details of this cosmic wonder.', '<p>NASA\'s James Webb Space Telescope recently imaged the Sombrero Galaxy with its NIRCam (Near-Infrared Camera), which shows dust from the galaxy\'s outer ring blocking stellar light from stars within the galaxy. In the central region of the galaxy, the roughly 2,000 globular clusters, or collections of hundreds of thousands of old stars held together by gravity, glow in the near-infrared.</p><p>The Sombrero Galaxy is around 30 million light-years from Earth in the constellation Virgo. From Earth, we see this galaxy nearly \"edge-on,\" or from the side.</p><p>This new image reveals the smooth, clumpy nature of the dust that makes up the galaxy\'s outer ring, where new stars are forming. The JWST\'s infrared view is giving astronomers and space enthusiasts a whole new perspective on this iconic galaxy.</p>', 'image-of-the-day.jpg', 2, 2, 'published', 173, 1, '2025-12-03 15:25:03', '2025-12-07 11:11:03', '2024-12-01 01:30:00'),
-(2, 'The Future of Mars Exploration', 'the-future-of-mars-exploration', 'As we stand on the brink of a new era in space exploration, Mars missions are becoming more ambitious and closer to reality.', '<p>The red planet has captivated humanity for centuries, and now we\'re closer than ever to establishing a human presence on Mars. Recent missions by NASA, SpaceX, and other space agencies have paved the way for future exploration.</p><h2>Current Missions</h2><p>The Perseverance rover continues to explore the Jezero Crater, searching for signs of ancient microbial life. Meanwhile, the Ingenuity helicopter has proven that powered flight is possible in Mars\' thin atmosphere.</p><h2>Future Plans</h2><p>SpaceX\'s Starship is being developed specifically for Mars missions, with Elon Musk aiming for the first crewed mission by the 2030s. NASA\'s Artemis program will also play a crucial role, testing technologies on the Moon before applying them to Mars.</p>', 'mars-image.jpg', 2, 1, 'published', 255, 1, '2025-12-03 15:25:03', '2025-12-07 10:04:59', '2024-11-28 05:20:00'),
+(1, 'Webb Sees Sombrero Galaxy in Near-Infrared', 'webb-sees-sombrero-galaxy-in-near-infrared', 'NASA&#039;s James Webb Space Telescope recently imaged the Sombrero Galaxy with its NIRCam, revealing stunning details of this cosmic wonder.', '<p>NASA\'s James Webb Space Telescope recently imaged the Sombrero Galaxy with its NIRCam (Near-Infrared Camera), which shows dust from the galaxy\'s outer ring blocking stellar light from stars within the galaxy. In the central region of the galaxy, the roughly 2,000 globular clusters, or collections of hundreds of thousands of old stars held together by gravity, glow in the near-infrared.</p><p>The Sombrero Galaxy is around 30 million light-years from Earth in the constellation Virgo. From Earth, we see this galaxy nearly \"edge-on,\" or from the side.</p><p>This new image reveals the smooth, clumpy nature of the dust that makes up the galaxy\'s outer ring, where new stars are forming. The JWST\'s infrared view is giving astronomers and space enthusiasts a whole new perspective on this iconic galaxy.</p>', 'image-of-the-day.jpg', 1, 2, 'published', 173, 1, '2025-12-03 15:25:03', '2025-12-09 02:15:38', '2024-12-01 01:30:00'),
+(2, 'The Future of Mars Exploration', 'the-future-of-mars-exploration', 'As we stand on the brink of a new era in space exploration, Mars missions are becoming more ambitious and closer to reality.', '<p>The red planet has captivated humanity for centuries, and now we\'re closer than ever to establishing a human presence on Mars. Recent missions by NASA, SpaceX, and other space agencies have paved the way for future exploration.</p><h2>Current Missions</h2><p>The Perseverance rover continues to explore the Jezero Crater, searching for signs of ancient microbial life. Meanwhile, the Ingenuity helicopter has proven that powered flight is possible in Mars\' thin atmosphere.</p><h2>Future Plans</h2><p>SpaceX\'s Starship is being developed specifically for Mars missions, with Elon Musk aiming for the first crewed mission by the 2030s. NASA\'s Artemis program will also play a crucial role, testing technologies on the Moon before applying them to Mars.</p>', 'mars-image.jpg', 2, 1, 'published', 259, 1, '2025-12-03 15:25:03', '2025-12-12 15:00:39', '2024-11-28 05:20:00'),
 (3, 'Understanding Black Holes: A Beginner\'s Guide', 'understanding-black-holes-beginners-guide', 'Black holes are among the most mysterious objects in the universe. Let\'s explore what they are and how they work.', '<p>Black holes are regions of spacetime where gravity is so strong that nothing, not even light, can escape from them. They form when massive stars collapse at the end of their life cycles.</p><h2>Types of Black Holes</h2><p>There are several types of black holes: stellar-mass black holes, intermediate-mass black holes, and supermassive black holes that sit at the centers of galaxies.</p><h2>Event Horizon</h2><p>The boundary of a black hole is called the event horizon. Once anything crosses this point, it can never return. Inside the event horizon lies the singularity, a point of infinite density.</p><p>Recent observations using the Event Horizon Telescope have even captured the first images of black holes, revolutionizing our understanding of these cosmic phenomena.</p>', 'space.jpg', 3, 2, 'published', 193, 1, '2025-12-03 15:25:03', '2025-12-07 11:11:16', '2024-11-25 00:15:00'),
 (4, 'SpaceX Starship: The Rocket That Will Take Us to Mars', 'spacex-starship-rocket-to-mars', 'SpaceX\'s Starship represents the future of space travel, designed to carry both crew and cargo to the Moon, Mars, and beyond.', '<p>Starship is the world\'s most powerful launch vehicle ever developed, capable of carrying up to 100 people on long-duration interplanetary flights. Standing at 120 meters tall, it\'s a fully reusable transportation system designed to revolutionize space travel.</p><h2>Key Features</h2><p>The spacecraft consists of two stages: the Super Heavy booster and the Starship spacecraft. Both stages are designed to be fully and rapidly reusable, dramatically reducing the cost of space access.</p><h2>Test Flights</h2><p>SpaceX has conducted multiple test flights, each providing valuable data to improve the design. The company continues to iterate rapidly, bringing humanity closer to becoming a multi-planetary species.</p>', 'spaceX-flight-rocket.jpg', 2, 3, 'published', 318, 1, '2025-12-03 15:25:03', '2025-12-07 11:11:09', '2024-11-20 07:45:00'),
-(5, 'The International Space Station: 25 Years of Science', 'international-space-station-25-years', 'For over two decades, the ISS has served as a unique laboratory for scientific research and international cooperation.', '<p>The International Space Station (ISS) represents one of humanity\'s greatest achievements in space exploration. Launched in 1998, it has been continuously inhabited for over 20 years, hosting astronauts from around the world.</p><h2>Scientific Research</h2><p>The ISS serves as a microgravity laboratory where researchers conduct experiments in biology, human biology, physics, astronomy, and meteorology. The unique environment has led to breakthroughs in medicine, materials science, and our understanding of how the human body adapts to space.</p><h2>International Cooperation</h2><p>Involving five space agencies (NASA, Roscosmos, JAXA, ESA, and CSA), the ISS stands as a symbol of international cooperation and peaceful use of space.</p>', 'sapceX-image.jpg', 3, 1, 'published', 175, 1, '2025-12-03 15:25:03', '2025-12-07 12:26:10', '2024-11-15 02:30:00'),
+(5, 'The International Space Station: 25 Years of Science', 'international-space-station-25-years', 'For over two decades, the ISS has served as a unique laboratory for scientific research and international cooperation.', '<p>The International Space Station (ISS) represents one of humanity\'s greatest achievements in space exploration. Launched in 1998, it has been continuously inhabited for over 20 years, hosting astronauts from around the world.</p><h2>Scientific Research</h2><p>The ISS serves as a microgravity laboratory where researchers conduct experiments in biology, human biology, physics, astronomy, and meteorology. The unique environment has led to breakthroughs in medicine, materials science, and our understanding of how the human body adapts to space.</p><h2>International Cooperation</h2><p>Involving five space agencies (NASA, Roscosmos, JAXA, ESA, and CSA), the ISS stands as a symbol of international cooperation and peaceful use of space.</p>', 'sapceX-image.jpg', 3, 1, 'published', 176, 1, '2025-12-03 15:25:03', '2025-12-07 13:49:18', '2024-11-15 02:30:00'),
 (6, 'Discovering Exoplanets: Worlds Beyond Our Solar System', 'discovering-exoplanets-worlds-beyond', 'The search for planets orbiting other stars has revealed thousands of worlds, some of which might harbor life.', '<p>Since the first confirmed detection in 1992, astronomers have discovered over 5,000 exoplanets. These discoveries have revolutionized our understanding of planetary systems and the potential for life beyond Earth.</p><h2>Detection Methods</h2><p>Scientists use several methods to detect exoplanets, including the transit method (observing dimming as a planet passes in front of its star) and the radial velocity method (detecting wobbles in a star caused by orbiting planets).</p><h2>Habitable Worlds</h2><p>Some exoplanets lie in their star\'s habitable zone, where conditions might allow liquid water to exist on the surface. These worlds are prime targets in the search for extraterrestrial life.</p>', 'planets-image.jpg', 2, 2, 'published', 201, 1, '2025-12-03 15:25:03', '0000-00-00 00:00:00', '2024-11-09 23:00:00'),
-(7, 'Something', 'something', '', 'az zcx xc', NULL, 1, 5, 'published', 9, 1, '2025-12-03 16:03:43', '2025-12-07 09:56:19', '2025-12-03 16:12:02'),
-(8, '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'gotucagol', 'd,sflje fa ,e jfib,uiarh.ufn.runasd.lnvsadn ;ofwue kmnl ,a,kjn faj liejsd r,nf lisyblf weu', 'eto guta guti ka ', NULL, 1, NULL, 'draft', 0, 1, '2025-12-07 10:57:29', '0000-00-00 00:00:00', NULL),
-(9, 'gybyuhj', 'gybyuhj', '', 'mjmk jk ', '6935609f00f6c_1765105823.png', 1, 2, 'published', 1, 1, '2025-12-07 11:03:54', '2025-12-07 11:10:53', '2025-12-07 11:10:47'),
-(10, 'esdc n lm dka.아', 'esdc-n-lm-dka', 'ㅇ마ㅜㄴ.어 ㅜ.ㅊ머누이ㅓ춤어ㅝㅁ어', 'dkldlkn.kcnlnladifnlaeriu', NULL, 1, 4, 'published', 2, 1, '2025-12-07 11:13:26', '2025-12-07 12:25:05', '2025-12-07 11:42:11'),
-(11, 'efavjkd nvkjnadfnvkj d', 'fajsdfiandjcna;sdn', 'adnasnd.,cna.skdjnc;jkasnd;cj', ';dvnajnsldfnlasndlf;ije;oifjc;asdm;cloiasl', NULL, 1, 2, 'published', 2, 1, '2025-12-07 11:40:27', '2025-12-07 12:17:37', '2025-12-07 11:42:05'),
-(12, 'aodi', 'sdanldnlj', 'sdvbakjsdhl', 'diuahdiucnkjalsdjnl', NULL, 1, 1, 'published', 2, 1, '2025-12-07 11:40:46', '2025-12-07 12:25:56', '2025-12-07 11:41:57'),
-(13, ';qiwer', 'wdjh', 'Dslcj', 'ㅇ니어hluSdunㅜ이n', NULL, 1, NULL, 'published', 0, 1, '2025-12-07 11:41:37', '2025-12-07 11:41:50', '2025-12-07 11:41:50');
+(7, 'Something something', 'something-something', '', 'Something something something something something something something something something something something something something something something something something something something something', NULL, 1, 5, 'published', 10, 1, '2025-12-03 16:03:43', '2025-12-13 15:17:46', '2025-12-03 16:12:02'),
+(8, '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', 'gotucagol', 'd,sflje fa ,e jfib,uiarh.ufn.runasd.lnvsadn ;ofwue kmnl ,a,kjn faj liejsd r,nf lisyblf weu', 'eto guta guti ka ', NULL, 1, NULL, 'draft', 0, 1, '2025-12-07 10:57:29', '2025-12-13 15:17:02', NULL),
+(9, 'gybyuhj', 'gybyuhj', '', 'mjmk jk ', '6935609f00f6c_1765105823.png', 1, 9, 'draft', 2, 1, '2025-12-07 11:03:54', '2025-12-13 15:16:56', '2025-12-07 11:10:47'),
+(10, 'esdc n lm dka.아', 'esdc-n-lm-dka', 'ㅇ마ㅜㄴ.어 ㅜ.ㅊ머누이ㅓ춤어ㅝㅁ어', 'dkldlkn.kcnlnladifnlaeriu', NULL, 1, 4, 'draft', 5, 1, '2025-12-07 11:13:26', '2025-12-13 15:16:51', '2025-12-07 11:42:11'),
+(11, 'efavjkd nvkjnadfnvkj d', 'efavjkd-nvkjnadfnvkj-d', 'adnasnd.,cna.skdjnc;jkasnd;cj', ';dvnajnsldfnlasndlf;ije;oifjc;asdm;cloiasl', NULL, 1, 2, 'draft', 3, 1, '2025-12-07 11:40:27', '2025-12-13 15:16:47', '2025-12-07 11:42:05'),
+(12, 'aodi', 'sdanldnlj', 'sdvbakjsdhl', 'diuahdiucnkjalsdjnl', NULL, 1, 1, 'draft', 2, 1, '2025-12-07 11:40:46', '2025-12-13 15:16:22', '2025-12-07 11:41:57'),
+(13, ';qiwer', 'wdjh', 'Dslcj', 'ㅇ니어hluSdunㅜ이n', NULL, 1, NULL, 'draft', 0, 1, '2025-12-07 11:41:37', '2025-12-13 15:16:19', '2025-12-07 11:41:50'),
+(14, 'dsa123 # 3 23*83012 _ -123123sasAs!!!', 'dsa123-3-23-83012-123123sasas', '', 'wfwefwef', NULL, 1, 8, 'draft', 1, 1, '2025-12-12 14:55:00', '2025-12-13 15:16:14', '2025-12-12 14:55:10'),
+(15, 'asdasdxe312edw21313131344444#n 8273213%1931 13413', 'asdasdxe312edw21313131344444-n-8273213-1931-13413', '', 'scacacsa', '693d78ec8c7cf_1765636332.png', 1, 2, 'published', 1, 1, '2025-12-13 14:32:12', '2025-12-13 15:18:02', '2025-12-13 14:32:31'),
+(16, 'cdsaad@@@d qwdqwed3232@#@@ ^%^&amp;amp;amp;', 'cdsaad-d-qwdqwed3232-amp', '', 'DXASXDS', NULL, 1, NULL, 'draft', 1, 1, '2025-12-13 14:38:05', '2025-12-13 15:15:36', '2025-12-13 14:38:12');
 
 --
 -- Triggers `blog_posts`
@@ -277,11 +340,13 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `post_count`, `created_at`, `updated_at`) VALUES
-(1, 'Space Exploration', 'space-exploration', 'Articles about space missions and cosmic discoveries', 3, '2025-12-03 15:25:03', '2025-12-07 11:41:57'),
-(2, 'Astronomy', 'astronomy', 'Celestial phenomena and sky observations', 5, '2025-12-03 15:25:03', '2025-12-07 11:42:05'),
+(1, 'Space Exploration', 'space-exploration', 'Articles about space missions and cosmic discoveries', 2, '2025-12-03 15:25:03', '2025-12-13 15:16:22'),
+(2, 'Astronomy', 'astronomy', 'Celestial phenomena and sky observations', 6, '2025-12-03 15:25:03', '2025-12-13 15:18:02'),
 (3, 'Technology', 'technology', 'Space technology and innovations', 1, '2025-12-03 15:25:03', '2025-12-03 15:25:04'),
-(4, 'Science', 'science', 'Scientific breakthroughs and research', 1, '2025-12-03 15:25:03', '2025-12-07 11:42:11'),
-(5, 'NASA Updates Something', 'nasa-updates', 'Latest news from NASA missions', 1, '2025-12-03 15:25:03', '2025-12-04 23:57:48');
+(4, 'Science', 'science', 'Scientific breakthroughs and research', 0, '2025-12-03 15:25:03', '2025-12-13 15:16:51'),
+(5, 'NASA Updates Something', 'nasa-updates', 'Latest news from NASA missions', 1, '2025-12-03 15:25:03', '2025-12-04 23:57:48'),
+(8, 'dsa123 # 3 23*83012 _ -123123sasAs!!!', 'dsa123-3-23-83012-123123sasas', '', -1, '2025-12-12 14:56:16', '2025-12-13 15:16:14'),
+(9, 'dsa123 # 3 23*83012 _ -123123sasAs!!!', 'dsa123 # 3 23*83012 _ -123123sasAs!!!', '', -1, '2025-12-12 14:57:01', '2025-12-13 15:16:56');
 
 -- --------------------------------------------------------
 
@@ -308,10 +373,10 @@ CREATE TABLE `contact_messages` (
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `status`, `ip_address`, `user_agent`, `created_at`, `read_at`, `replied_at`) VALUES
-(1, 'John Doe', 'john.doe@example.com', 'Question about Mars mission', 'I loved your article about Mars exploration! When do you think humans will actually land on Mars?', 'read', '192.168.1.1', NULL, '2024-12-03 01:30:00', NULL, NULL),
-(2, 'Sarah Johnson', 'sarah.j@example.com', 'Collaboration inquiry', 'I\'m interested in collaborating on space education content. Could we schedule a call?', 'read', '192.168.1.2', NULL, '2024-12-02 05:20:00', NULL, NULL),
-(3, 'Mike Chen', 'mike.chen@example.com', 'Technical question', 'Great content! I have a question about black hole formation. Can you provide more details?', 'new', '192.168.1.3', NULL, '2024-12-01 00:15:00', NULL, NULL),
-(4, 'Md Anwar Hosen', 'azharanowar@gmail.com', '', 'dbdfxbfdxb', 'new', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 10:09:03', NULL, NULL),
+(1, 'Abu Sadik', 'abu@example.com', 'Question about Mars mission', 'I loved your article about Mars exploration! When do you think humans will actually land on Mars?', 'read', '192.168.1.1', NULL, '2024-12-03 01:30:00', NULL, NULL),
+(2, 'Topu Saiful', 'topu.j@example.com', 'Collaboration inquiry', 'I\'m interested in collaborating on space education content. Could we schedule a call?', 'read', '192.168.1.2', NULL, '2024-12-02 05:20:00', NULL, NULL),
+(3, 'Nurbek', 'nurbek@example.com', 'Technical question', 'Great content! I have a question about black hole formation. Can you provide more details?', 'new', '192.168.1.3', NULL, '2024-12-01 00:15:00', NULL, NULL),
+(4, 'Md Anwar Hosen', 'azharanowar@gmail.com', '', 'dbdfxbfdxb', 'read', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 10:09:03', NULL, NULL),
 (5, '123456789', 'goru@gmail.com', 'moira ja tui', 'morar moto kotha kos kn?', 'new', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', '2025-12-07 11:37:25', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -342,7 +407,8 @@ INSERT INTO `navigation_menu` (`id`, `title`, `url`, `target`, `display_order`, 
 (2, 'Blogs', 'blogs.php', '_self', 2, 1, 0, NULL, '2025-12-03 15:25:03', '2025-12-06 17:07:01'),
 (3, 'About Us', 'about.php', '_self', 3, 1, 0, NULL, '2025-12-03 15:25:03', '0000-00-00 00:00:00'),
 (4, 'Contact Us', 'contact.php', '_self', 4, 1, 0, NULL, '2025-12-03 15:25:03', '2025-12-06 17:07:07'),
-(5, 'Join Now', '#', '_self', 5, 1, 1, NULL, '2025-12-06 17:02:05', '2025-12-06 17:07:52');
+(5, 'Join Now', '#', '_self', 5, 1, 1, NULL, '2025-12-06 17:02:05', '2025-12-07 13:59:38'),
+(7, 'Some Event', '#', '_blank', 6, 1, 1, NULL, '2025-12-07 14:00:31', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -386,37 +452,37 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `setting_key`, `setting_value`, `setting_type`, `setting_group`, `description`, `updated_at`, `updated_by`) VALUES
-(1, 'site_name', 'PipilikaX', 'text', 'general', 'Website name', '2025-12-06 16:07:30', 1),
-(2, 'site_tagline', 'Our Effort for Your Space Exploration', 'text', 'general', 'Website tagline', '2025-12-06 16:07:30', 1),
-(3, 'site_logo', 'pipilika-logo.png', 'image', 'general', 'Main site logo', '2025-12-06 17:23:33', NULL),
-(4, 'site_logo_white', 'pipilika-logo-main-white.png', 'image', 'general', 'White logo for dark backgrounds', '2025-12-06 17:23:33', NULL),
-(5, 'site_favicon', 'pipilika-favicon.png', 'image', 'general', 'Site favicon', '2025-12-06 17:23:33', NULL),
-(6, 'hero_welcome_title', 'Welcome to PipilikaX', 'text', 'homepage', 'Hero section main title', '2025-12-06 17:23:33', 1),
-(7, 'hero_intro_text', 'Adventures beyond the stars, adrenaline that defies gravity – welcome to:', 'textarea', 'homepage', 'Hero introduction text', '2025-12-06 17:24:38', 1),
-(8, 'hero_phrase_1', 'Explore our world.', 'text', 'homepage', 'Typing animation phrase 1', '2025-12-06 17:24:38', 1),
-(9, 'hero_phrase_2', 'Discover new horizons.', 'text', 'homepage', 'Typing animation phrase 2', '2025-12-06 17:24:38', 1),
-(10, 'hero_phrase_3', 'Unleash your curiosity.', 'text', 'homepage', 'Typing animation phrase 3', '2025-12-06 17:24:38', 1),
-(11, 'hero_phrase_4', 'Journey into the unknown.', 'text', 'homepage', 'Typing animation phrase 4', '2025-12-06 17:24:38', 1),
-(12, 'hero_phrase_5', 'Experience the extraordinary.', 'text', 'homepage', 'Typing animation phrase 5', '2025-12-06 17:24:38', 1),
-(13, 'hero_cta_text', 'Join the Journey', 'text', 'homepage', 'Hero button text', '2025-12-06 17:23:33', 1),
-(14, 'hero_cta_url', '#', 'text', 'homepage', 'Hero button URL', '2025-12-06 17:23:33', 1),
-(15, 'about_title', 'Get to know PipilikaX', 'text', 'homepage', 'About section title', '2025-12-06 17:23:33', 1),
-(16, 'about_text', 'Pipilika X is a visionary initiative driven by curiosity, exploration, and the pursuit of knowledge. Inspired by the determination of ants (pipilika in Sanskrit) and the bold ambition of pioneers like SpaceX, Pipilika X is on a mission to make complex information about Earth and the universe easily accessible to everyone.\r\n\r\nWe believe that knowledge should not be reserved for a few—it should flow freely, like stardust, reaching minds across the globe. Whether it\'s decoding the wonders of space, uncovering hidden patterns of our planet, or translating scientific breakthroughs into everyday language, Pipilika X is here to deliver insights that matter.\r\n\r\nOur journey isn\'t just about reaching the stars—it\'s about understanding them, and bringing that understanding back to Earth in the simplest, most engaging way possible.\r\n\r\nPipilika X – Know the world. Explore beyond.', 'textarea', 'homepage', 'About section content', '2025-12-06 17:23:33', 1),
-(17, 'about_cta_text', 'Join the Journey Now', 'text', 'homepage', 'About button text', '2025-12-06 17:23:33', 1),
-(18, 'footer_brand_name', 'PipilikaX', 'text', 'footer', 'Footer brand name', '2025-12-06 17:23:33', NULL),
-(19, 'footer_copyright', 'Copyright © 2025 – All rights reserved.', 'text', 'footer', 'Copyright text', '2025-12-06 17:23:33', NULL),
-(20, 'footer_github_url', 'https://github.com/azharanowar/pipilikaX', 'url', 'footer', 'GitHub repository link', '2025-12-06 17:23:33', NULL),
-(21, 'contact_email', 'azharanowar@gmail.com', 'text', 'contact', 'Contact email', '2025-12-07 11:46:59', 1),
-(22, 'contact_phone', '010-5149-3665', 'text', 'contact', 'Contact phone', '2025-12-07 11:46:59', 1),
-(23, 'contact_address', 'Dong-Eui University, Busan, South Korea.', 'text', 'contact', 'Contact address', '2025-12-07 11:46:59', 1),
-(24, 'facebook_url', 'https://fb.com/#', 'url', 'contact', 'Facebook page URL', '2025-12-07 11:46:59', 1),
-(25, 'twitter_url', 'https://twitter.com/#', 'url', 'contact', 'Twitter profile URL', '2025-12-07 11:46:59', 1),
-(26, 'linkedin_url', 'https://linkedin.com/in/#', 'url', 'contact', 'LinkedIn page URL', '2025-12-07 11:46:59', 1),
-(27, 'github_url', 'https://github.com/azharanowar/pipilikaX', 'url', 'contact', 'GitHub repository URL', '2025-12-07 11:46:59', 1),
+(1, 'site_name', 'PipilikaX', 'text', 'general', 'Website name', '2025-12-13 15:31:55', 1),
+(2, 'site_tagline', 'Our Effort for Your Space Exploration', 'text', 'general', 'Website tagline', '2025-12-13 15:31:55', 1),
+(3, 'site_logo', '693d86cfe2751_1765639887.png', 'image', 'general', 'Main site logo', '2025-12-13 15:31:27', 1),
+(4, 'site_logo_white', '693d86cfe2b16_1765639887.png', 'image', 'general', 'White logo for dark backgrounds', '2025-12-13 15:31:27', 1),
+(5, 'site_favicon', '693d86cfe2e56_1765639887.png', 'image', 'general', 'Site favicon', '2025-12-13 15:31:27', 1),
+(6, 'hero_welcome_title', 'Welcome to PipilikaX', 'text', 'homepage', 'Hero section main title', '2025-12-13 15:29:48', 1),
+(7, 'hero_intro_text', 'Adventures beyond the stars, adrenaline that defies gravity – welcome to:', 'textarea', 'homepage', 'Hero introduction text', '2025-12-13 15:29:48', 1),
+(8, 'hero_phrase_1', 'Explore our world.', 'text', 'homepage', 'Typing animation phrase 1', '2025-12-13 15:29:48', 1),
+(9, 'hero_phrase_2', 'Discover new horizons.', 'text', 'homepage', 'Typing animation phrase 2', '2025-12-13 15:29:48', 1),
+(10, 'hero_phrase_3', 'Unleash your curiosity. ', 'text', 'homepage', 'Typing animation phrase 3', '2025-12-13 15:29:48', 1),
+(11, 'hero_phrase_4', 'Journey into the unknown.', 'text', 'homepage', 'Typing animation phrase 4', '2025-12-13 15:29:48', 1),
+(12, 'hero_phrase_5', 'Experience the extraordinary.', 'text', 'homepage', 'Typing animation phrase 5', '2025-12-13 15:29:48', 1),
+(13, 'hero_cta_text', 'Join the Journey', 'text', 'homepage', 'Hero button text', '2025-12-13 15:29:48', 1),
+(14, 'hero_cta_url', '#', 'text', 'homepage', 'Hero button URL', '2025-12-13 15:29:48', 1),
+(15, 'about_title', 'Get to know PipilikaX', 'text', 'homepage', 'About section title', '2025-12-13 15:29:48', 1),
+(16, 'about_text', 'Pipilika X is a visionary initiative driven by curiosity, exploration, and the pursuit of knowledge. Inspired by the determination of ants (pipilika in Sanskrit) and the bold ambition of pioneers like SpaceX, Pipilika X is on a mission to make complex information about Earth and the universe easily accessible to everyone.\r\n\r\nWe believe that knowledge should not be reserved for a few—it should flow freely, like stardust, reaching minds across the globe. Whether it\'s decoding the wonders of space, uncovering hidden patterns of our planet, or translating scientific breakthroughs into everyday language, Pipilika X is here to deliver insights that matter.\r\n\r\nOur journey isn\'t just about reaching the stars—it\'s about understanding them, and bringing that understanding back to Earth in the simplest, most engaging way possible.\r\n\r\nPipilika X – Know the world. Explore beyond.', 'textarea', 'homepage', 'About section content', '2025-12-13 15:29:48', 1),
+(17, 'about_cta_text', 'Join the Journey Now', 'text', 'homepage', 'About button text', '2025-12-13 15:29:48', 1),
+(18, 'footer_brand_name', 'PipilikaX.', 'text', 'footer', 'Footer brand name', '2025-12-13 15:34:45', 1),
+(19, 'footer_copyright', 'Copyright © 2025 – All rights reserved.', 'text', 'footer', 'Copyright text', '2025-12-13 15:34:45', 1),
+(20, 'footer_github_url', 'https://github.com/azharanowar/pipilikaX', 'url', 'footer', 'GitHub repository link', '2025-12-13 15:34:45', 1),
+(21, 'contact_email', 'azharanowar@gmail.com', 'text', 'contact', 'Contact email', '2025-12-13 15:23:56', 1),
+(22, 'contact_phone', '010-5149-3665', 'text', 'contact', 'Contact phone', '2025-12-13 15:23:56', 1),
+(23, 'contact_address', 'Dong-Eui University, Busan, South Korea.', 'text', 'contact', 'Contact address', '2025-12-13 15:23:56', 1),
+(24, 'facebook_url', 'https://fb.com/#', 'url', 'contact', 'Facebook page URL', '2025-12-13 15:23:56', 1),
+(25, 'twitter_url', 'https://twitter.com/#', 'url', 'contact', 'Twitter profile URL', '2025-12-13 15:23:56', 1),
+(26, 'linkedin_url', 'https://linkedin.com/in/#', 'url', 'contact', 'LinkedIn page URL', '2025-12-13 15:23:56', 1),
+(27, 'github_url', 'https://github.com/azharanowar/pipilikaX', 'url', 'contact', 'GitHub repository URL', '2025-12-13 15:23:56', 1),
 (28, 'about_page_subtitle', 'We are a passionate team dedicated to creating cutting-edge AI solutions that impact the future.', 'textarea', 'about', 'About page subtitle', '0000-00-00 00:00:00', NULL),
 (29, 'header_cta_text', 'Join Now', 'text', 'header', 'Header CTA Button Text', '0000-00-00 00:00:00', NULL),
 (30, 'header_cta_url', '#', 'url', 'header', 'Header CTA Button URL', '0000-00-00 00:00:00', NULL),
-(31, 'contact_map_embed', 'https://maps.google.com/maps?q=Dong-Eui University, Busan, South Korea&t=k&z=13&ie=UTF8&iwloc=&output=embed', 'textarea', 'contact', 'Google Maps Embed URL for contact page', '2025-12-07 11:46:59', 1);
+(31, 'contact_map_embed', 'https://maps.google.com/maps?q=Dong-Eui University, Busan, South Korea&t=k&z=13&ie=UTF8&iwloc=&output=embed', 'textarea', 'contact', 'Google Maps Embed URL for contact page', '2025-12-13 15:23:56', 1);
 
 -- --------------------------------------------------------
 
@@ -450,7 +516,8 @@ INSERT INTO `team_members` (`id`, `name`, `position`, `photo`, `bio`, `email`, `
 (1, 'Azhar Anowar', 'Founder & CEO', 'team-1.jpg', 'Visionary leader driving PipilikaX towards making space knowledge accessible to everyone.', 'azhar@pipilikax.com', NULL, 'https://facebook.com/azharanowar', 'https://www.linkedin.com/in/azharanowar/', 'https://x.com/AzharAnowar', 'https://github.com/azharanowar', 1, 1, '2025-12-03 15:25:04', '0000-00-00 00:00:00'),
 (2, 'Md Arafat Hossain', 'Chief Technology Officer', 'team-2.jpg', 'Technology enthusiast building innovative solutions for space education.', 'arafat@pipilikax.com', NULL, 'https://www.facebook.com/sijan.khan4646', '#', '#', '#', 2, 1, '2025-12-03 15:25:04', '0000-00-00 00:00:00'),
 (3, 'Al-Rafi Azad', 'Product Designer', 'team-3.jpg', 'Creating beautiful and intuitive designs that bring space closer to people.', 'rafi@pipilikax.com', NULL, 'https://www.facebook.com/alrafi.azad.9', '#', '#', '#', 3, 1, '2025-12-03 15:25:04', '0000-00-00 00:00:00'),
-(4, 'Taohidul Islam', 'Marketing Lead', 'team-4.jpg', 'Spreading the word about space exploration and making PipilikaX accessible to all.', 'taohid@pipilikax.com', NULL, 'https://www.facebook.com/mdtaohid.binbhuiyan', '#', '#', '#', 4, 1, '2025-12-03 15:25:04', '0000-00-00 00:00:00');
+(4, 'Taohidul Islam', 'Marketing Lead', 'team-4.jpg', 'Spreading the word about space exploration and making PipilikaX accessible to all.', 'taohid@pipilikax.com', NULL, 'https://www.facebook.com/mdtaohid.binbhuiyan', '#', '#', '#', 4, 1, '2025-12-03 15:25:04', '0000-00-00 00:00:00'),
+(13, 'Test team', 'Test', NULL, '', NULL, NULL, '', '', '', NULL, 0, 1, '2025-12-07 13:55:22', '2025-12-13 15:41:35');
 
 -- --------------------------------------------------------
 
@@ -478,15 +545,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `full_name`, `role`, `is_active`, `avatar`, `bio`, `created_at`, `updated_at`, `last_login`) VALUES
-(1, 'admin', 'admin@pipilikax.com', '$2y$10$SebxqUzYyqsHtoIGiP4Yp.kW8TEAc5cAY.haJr1NGZ8w6tW/p81hm', 'Azhar Anowar', 'admin', 1, '', 'System administrator', '2025-12-03 15:25:03', '2025-12-07 11:56:24', '2025-12-07 11:56:24'),
+(1, 'admin', 'admin@pipilikax.com', '$2y$10$SebxqUzYyqsHtoIGiP4Yp.kW8TEAc5cAY.haJr1NGZ8w6tW/p81hm', 'Azhar Anowar', 'admin', 1, '', 'System administrator', '2025-12-03 15:25:03', '2025-12-13 14:31:12', '2025-12-13 14:31:12'),
 (2, 'azhar', 'azhar@pipilikax.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Azhar Anowar', 'editor', 1, NULL, 'Founder & CEO', '2025-12-03 15:25:03', '0000-00-00 00:00:00', NULL),
-(3, 'arafat', 'arafat@pipilikax.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Md Arafat Hossain', 'author', 1, NULL, 'Chief Technology Officer', '2025-12-03 15:25:03', '0000-00-00 00:00:00', NULL),
+(3, 'arafat', 'arafat@pipilikax.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Md Arafat Hossain', 'author', 1, NULL, 'Chief Technology Officer', '2025-12-03 15:25:03', '2025-12-12 14:58:25', NULL),
 (4, 'azharcodna', 'codna@gmail.com', '$2y$10$AlaH.yaC.SuCKZmjKy2ScujbwGE8cARGglajZuXMIJfZTS3PLokzS', 'c', 'subscriber', 1, '', '', '2025-12-07 11:44:15', '0000-00-00 00:00:00', NULL),
 (5, 'mdtaohid', '1212@gmail.com', '$2y$10$ShVMmlr4.jsg2FqtGkbJDOuWsQPtVNAHyfufp2DnQozg8QeglY0wu', '', 'admin', 1, '', '12', '2025-12-07 11:45:39', '0000-00-00 00:00:00', NULL),
 (6, 'user1', 'user1@gmail.com', '$2y$10$Q6dmXzLn3S4q/xpWX157RuOtZHeA77mV5k0TM8HqWk9PyR4C9qc/C', '', 'subscriber', 1, '', '', '2025-12-07 11:47:48', '2025-12-07 11:55:51', '2025-12-07 11:55:51'),
 (7, 'user2', 'user2@gmail.com', '$2y$10$xTZh2l/1J92ju9ZZQ1orHepQtT/jH8rwab.iz1mm1mOuhJW1ifB1a', '', 'author', 1, '', '', '2025-12-07 11:48:11', '2025-12-07 11:50:04', '2025-12-07 11:50:04'),
 (8, 'user3', 'user3@gmail.com', '$2y$10$05NOysoPBZX1r7H5n1tC8.5N2R15uAPshLRrGBdl.EALivy78bovW', '', 'editor', 1, '', '', '2025-12-07 11:48:38', '2025-12-07 11:51:40', '2025-12-07 11:51:40'),
-(9, 'user4', 'user4@gmail.com', '$2y$10$tuK3Jtm/6yVpczjeW.Uw3uQrLoAQ30gOom0VD8ae.27Vt7RJzWrTa', '', 'admin', 1, '', '', '2025-12-07 11:49:33', '2025-12-07 11:53:03', '2025-12-07 11:53:03');
+(9, 'user4', 'user4@gmail.com', '$2y$10$tuK3Jtm/6yVpczjeW.Uw3uQrLoAQ30gOom0VD8ae.27Vt7RJzWrTa', '', 'admin', 1, '', '', '2025-12-07 11:49:33', '2025-12-07 11:53:03', '2025-12-07 11:53:03'),
+(10, 'alrafi', 'alrafo@gmail.com', '$2y$10$oI847cR5HqXxaDWUDLBc4ue7YBAJSWrAv70xFC09OWLfoSGPBuH0i', 'Al Rafi Azad', 'editor', 1, '693d87d859097_1765640152.png', '', '2025-12-13 15:35:52', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -604,19 +672,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `blog_posts`
 --
 ALTER TABLE `blog_posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -628,7 +696,7 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `navigation_menu`
 --
 ALTER TABLE `navigation_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -640,13 +708,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `team_members`
 --
 ALTER TABLE `team_members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

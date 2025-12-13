@@ -26,11 +26,15 @@
 ### 🛡️ Security Features
 - Password hashing with bcrypt
 - Session-based authentication with role permissions
-- CSRF protection on forms
-- Image upload validation (extension + MIME type)
-- SQL injection prevention with prepared statements
+- CSRF protection on all forms
+- Image upload validation (extension + MIME type verification)
+- SQL injection prevention with PDO prepared statements
 - XSS protection with output escaping
 - Production error handling (errors logged, not displayed)
+- Secure session management (HTTPOnly, SameSite=Strict cookies)
+- Session regeneration every 30 minutes
+- Auto-logout after 1 hour of inactivity
+- URL-friendly slug validation for posts and categories
 
 ---
 
@@ -181,17 +185,23 @@ Update `SITE_URL` in `config/constants.php` for your domain.
 
 ---
 
+Team members:
+Md Anwar Hosen
+Al-Rafi Azad
+Md Arafat Hossain
+Md Taohidul Islam
+
+---
+
+
 ## 📄 License
 
 Open-source for educational and learning purposes.
 
 ---
-
 ## 👨‍💻 Author
 
 Developed with ❤️ by [Azhar Anowar](https://github.com/azharanowar)  
 Feedback and contributions are welcome!
-
----
 
 🛰️ *"Explore the cosmos—one scroll at a time."*
