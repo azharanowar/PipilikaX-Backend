@@ -12,9 +12,35 @@ $nav_items = $nav_items_query->fetchAll();
 $regular_items = array_filter($nav_items, fn($item) => !$item['is_cta']);
 $cta_items = array_filter($nav_items, fn($item) => $item['is_cta']);
 
-// Get logo
-$site_logo = getSetting('site_logo', 'pipilika-logo.png');
-$site_logo_white = getSetting('site_logo_white', 'pipilika-logo-main-white.png');
+// Get logo settings
+$site_logo = getSetting('site_logo', '');
+$site_logo_white = getSetting('site_logo_white', '');
+$site_name = getSetting('site_name', 'PipilikaX');
+
+// Determine logo URLs - check uploads first, then assets
+$logo_url = null;
+$logo_white_url = null;
+
+if ($site_logo) {
+    if (file_exists(UPLOAD_PATH . 'settings/' . $site_logo)) {
+        $logo_url = UPLOAD_URL . '/settings/' . $site_logo;
+    } elseif (file_exists(ROOT_PATH . '/assets/images/' . $site_logo)) {
+        $logo_url = ASSETS_URL . '/images/' . $site_logo;
+    }
+}
+
+if ($site_logo_white) {
+    if (file_exists(UPLOAD_PATH . 'settings/' . $site_logo_white)) {
+        $logo_white_url = UPLOAD_URL . '/settings/' . $site_logo_white;
+    } elseif (file_exists(ROOT_PATH . '/assets/images/' . $site_logo_white)) {
+        $logo_white_url = ASSETS_URL . '/images/' . $site_logo_white;
+    }
+}
+
+// Fallback: if no white logo, use main logo; if no logo at all, will show text
+if (!$logo_white_url) {
+    $logo_white_url = $logo_url;
+}
 
 // Determine current page for active state
 $current_page = basename($_SERVER['PHP_SELF']);
@@ -25,7 +51,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- Logo -->
         <div class="logo-container">
             <a href="<?php echo SITE_URL; ?>" class="logo">
-                <img id="logoImage" src="<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_logo); ?>" alt="<?php echo htmlspecialchars(getSetting('site_name', 'PipilikaX')); ?> Logo" />
+                <?php if ($logo_url): ?>
+                    <img id="logoImage" src="<?php echo htmlspecialchars($logo_url); ?>" alt="<?php echo htmlspecialchars($site_name); ?> Logo" />
+                <?php else: ?>
+                    <span style="font-size: 24px; font-weight: 700; color: var(--main-color);"><?php echo htmlspecialchars($site_name); ?></span>
+                <?php endif; ?>
             </a>
         </div>
 
@@ -89,12 +119,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 <script>
     // Store logo URLs for JavaScript - will be used after scripts.js loads
-    window.pipilikaLogoDefault = '<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_logo); ?>';
-    window.pipilikaLogoWhite = '<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_logo_white); ?>';
+    <?php if ($logo_url): ?>
+    window.pipilikaLogoDefault = '<?php echo htmlspecialchars($logo_url); ?>';
+    window.pipilikaLogoWhite = '<?php echo htmlspecialchars($logo_white_url ?: $logo_url); ?>';
+    <?php else: ?>
+    window.pipilikaLogoDefault = null;
+    window.pipilikaLogoWhite = null;
+    <?php endif; ?>
     
     // Initialize logo sources when DOM is ready and scripts.js is loaded
     document.addEventListener('DOMContentLoaded', function() {
-        if (typeof updateLogoSources === 'function') {
+        if (typeof updateLogoSources === 'function' && window.pipilikaLogoDefault) {
             updateLogoSources(window.pipilikaLogoDefault, window.pipilikaLogoWhite);
         }
     });

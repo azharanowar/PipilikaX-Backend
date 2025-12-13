@@ -122,7 +122,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_user'])) {
 
         // Handle avatar upload
         $avatar_filename = $_POST['existing_avatar'] ?? '';
-        if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+
+        // Handle avatar deletion
+        if (isset($_POST['delete_avatar']) && $_POST['delete_avatar'] === '1') {
+            if ($avatar_filename && file_exists(UPLOAD_PATH . 'avatars/' . $avatar_filename)) {
+                unlink(UPLOAD_PATH . 'avatars/' . $avatar_filename);
+            }
+            $avatar_filename = '';
+        }
+        // Handle avatar upload (only if not deleting)
+        elseif (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
             // Create avatars directory if not exists
             if (!is_dir(UPLOAD_PATH . 'avatars')) {
                 mkdir(UPLOAD_PATH . 'avatars', 0755, true);
@@ -291,20 +300,25 @@ $role_badges = [
                 <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*">
                 <small style="color: #666;">Recommended: 200x200px square image</small>
                 <?php if ($edit_user && $edit_user['avatar']): ?>
-                    <div style="margin-top: 10px;">
-                        <?php
-                        $avatar_path = UPLOAD_PATH . 'avatars/' . $edit_user['avatar'];
-                        if (file_exists($avatar_path)) {
-                            $avatar_url = UPLOAD_URL . '/avatars/' . htmlspecialchars($edit_user['avatar']);
-                        } else {
-                            $avatar_url = null;
-                        }
-                        if ($avatar_url):
-                            ?>
-                            <img src="<?php echo $avatar_url; ?>" alt="Current avatar"
-                                style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
-                        <?php endif; ?>
+                    <?php
+                    $avatar_path = UPLOAD_PATH . 'avatars/' . $edit_user['avatar'];
+                    if (file_exists($avatar_path)) {
+                        $avatar_url = UPLOAD_URL . '/avatars/' . htmlspecialchars($edit_user['avatar']);
+                    } else {
+                        $avatar_url = null;
+                    }
+                    if ($avatar_url):
+                    ?>
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 15px;">
+                        <img src="<?php echo $avatar_url; ?>" alt="Current avatar"
+                            style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
+                        <span style="color: #666;">Current avatar</span>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer; color: #dc3545; font-size: 12px;">
+                            <input type="checkbox" name="delete_avatar" value="1">
+                            <i class="fas fa-trash"></i> Delete avatar
+                        </label>
                     </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
 

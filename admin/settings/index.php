@@ -72,12 +72,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_settings'])) {
 
                     $upload_result = uploadImage($file, 'settings');
                     if ($upload_result['success']) {
+                        // Get old image filename before updating
+                        $old_stmt = $pdo->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
+                        $old_stmt->execute([$key]);
+                        $old_value = $old_stmt->fetchColumn();
+
+                        // Delete old image if it exists in uploads folder
+                        if ($old_value) {
+                            $old_image_path = UPLOAD_PATH . 'settings/' . $old_value;
+                            if (file_exists($old_image_path)) {
+                                unlink($old_image_path);
+                            }
+                        }
+
                         // Update setting with new filename
                         $stmt = $pdo->prepare("UPDATE settings SET setting_value = ?, updated_by = ?, updated_at = NOW() WHERE setting_key = ?");
                         $stmt->execute([$upload_result['filename'], $current_user['id'], $key]);
                     } else {
                         $errors[] = "Error uploading $key: " . $upload_result['message'];
                     }
+                }
+            }
+        }
+
+        // Handle image deletions
+        $delete_images = $_POST['delete_images'] ?? [];
+        foreach ($delete_images as $key => $value) {
+            if ($value === '1') {
+                // Get current image filename
+                $stmt = $pdo->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
+                $stmt->execute([$key]);
+                $current_value = $stmt->fetchColumn();
+
+                if ($current_value) {
+                    // Delete from uploads folder
+                    $image_path = UPLOAD_PATH . 'settings/' . $current_value;
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
+
+                    // Clear the setting value
+                    $stmt = $pdo->prepare("UPDATE settings SET setting_value = '', updated_by = ?, updated_at = NOW() WHERE setting_key = ?");
+                    $stmt->execute([$current_user['id'], $key]);
+                    
+                    logActivity('delete', 'settings', null, "Deleted image for $key");
                 }
             }
         }
@@ -434,33 +472,42 @@ $csrf_token = generateCSRFToken();
                                 <?php break;
                             case 'image': ?>
                                 <?php if ($setting['setting_value']): ?>
-                                    <div style="margin-bottom: 10px;">
+                                    <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 15px;">
                                         <?php
                                         $settings_path = UPLOAD_PATH . 'settings/' . $setting['setting_value'];
                                         $assets_path = ROOT_PATH . '/assets/images/' . $setting['setting_value'];
 
                                         if (file_exists($settings_path)) {
                                             $img_url = UPLOAD_URL . '/settings/' . htmlspecialchars($setting['setting_value']);
+                                            $can_delete = true;
                                         } elseif (file_exists($assets_path)) {
                                             $img_url = ASSETS_URL . '/images/' . htmlspecialchars($setting['setting_value']);
+                                            $can_delete = false; // Don't delete assets images
                                         } else {
                                             $img_url = null;
+                                            $can_delete = false;
                                         }
 
                                         if ($img_url):
                                         ?>
                                             <img src="<?php echo $img_url; ?>" alt="Current image"
                                                 style="max-height: 60px; border-radius: 4px; background: #f0f0f0; padding: 5px;">
-                                            <span style="margin-left: 10px; color: #666; font-size: 12px;">
+                                            <span style="color: #666; font-size: 12px;">
                                                 <?php echo htmlspecialchars($setting['setting_value']); ?>
                                             </span>
+                                            <?php if ($can_delete): ?>
+                                                <label style="display: flex; align-items: center; gap: 5px; cursor: pointer; color: #dc3545; font-size: 12px;">
+                                                    <input type="checkbox" name="delete_images[<?php echo $setting['setting_key']; ?>]" value="1">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </label>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
                                 <input type="file" id="<?php echo $setting['setting_key']; ?>"
                                     name="settings_images[<?php echo $setting['setting_key']; ?>]" class="form-control"
                                     accept="image/*">
-                                <small style="color: #666;">Leave empty to keep current image</small>
+                                <small style="color: #666;"><?php echo $setting['setting_value'] ? 'Leave empty to keep current image' : 'Upload an image'; ?></small>
                                 <?php break;
                             case 'boolean': ?>
                                 <div style="padding-top: 5px;">

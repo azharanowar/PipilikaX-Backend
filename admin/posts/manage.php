@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($slug)) {
         $slug = createSlug($title);
+    } elseif (!isValidSlug($slug)) {
+        $errors[] = 'Slug must be URL-friendly: only lowercase letters (a-z), numbers (0-9), and hyphens (-) are allowed. Example: "my-post-title"';
     }
 
     if (empty($content)) {

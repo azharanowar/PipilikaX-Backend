@@ -66,7 +66,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_member'])) {
 
         // Handle photo upload - use null when no photo (not empty string)
         $photo_filename = !empty($_POST['existing_photo']) ? $_POST['existing_photo'] : null;
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+
+        // Handle photo deletion
+        if (isset($_POST['delete_photo']) && $_POST['delete_photo'] === '1') {
+            if ($photo_filename && file_exists(UPLOAD_PATH . 'team/' . $photo_filename)) {
+                unlink(UPLOAD_PATH . 'team/' . $photo_filename);
+            }
+            $photo_filename = null;
+        }
+        // Handle photo upload (only if not deleting)
+        elseif (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $upload_result = uploadImage($_FILES['photo'], 'team');
             if ($upload_result['success']) {
                 // Delete old photo if updating
@@ -203,19 +212,30 @@ $team_fallback_images = ['team-1.jpg', 'team-2.jpg', 'team-3.jpg', 'team-4.jpg']
             <label for="photo">Photo</label>
             <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
             <small style="color: #666;">Recommended size: 400x400px. Max file size: 5MB</small>
-            <?php if ($edit_member && $edit_member['photo']): ?>
-                <div style="margin-top: 10px;">
-                    <img src="<?php
-                    if (file_exists(UPLOAD_PATH . 'team/' . $edit_member['photo'])) {
-                        echo UPLOAD_URL . '/team/' . htmlspecialchars($edit_member['photo']);
-                    } elseif (file_exists(ROOT_PATH . '/assets/images/' . $edit_member['photo'])) {
-                        echo ASSETS_URL . '/images/' . htmlspecialchars($edit_member['photo']);
-                    } else {
-                        echo ASSETS_URL . '/images/' . $team_fallback_images[0];
-                    }
-                    ?>" alt="Current photo" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                    <span style="margin-left: 10px; color: #666;">Current photo</span>
-                </div>
+            <?php if ($edit_member && $edit_member['photo']):
+                $photo_url = null;
+                $can_delete = false;
+                if (file_exists(UPLOAD_PATH . 'team/' . $edit_member['photo'])) {
+                    $photo_url = UPLOAD_URL . '/team/' . htmlspecialchars($edit_member['photo']);
+                    $can_delete = true;
+                } elseif (file_exists(ROOT_PATH . '/assets/images/' . $edit_member['photo'])) {
+                    $photo_url = ASSETS_URL . '/images/' . htmlspecialchars($edit_member['photo']);
+                }
+                if ($photo_url):
+                    ?>
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 15px;">
+                        <img src="<?php echo $photo_url; ?>" alt="Current photo"
+                            style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                        <span style="color: #666;">Current photo</span>
+                        <?php if ($can_delete): ?>
+                            <label
+                                style="display: flex; align-items: center; gap: 5px; cursor: pointer; color: #dc3545; font-size: 12px;">
+                                <input type="checkbox" name="delete_photo" value="1">
+                                <i class="fas fa-trash"></i> Delete photo
+                            </label>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 

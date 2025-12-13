@@ -134,6 +134,23 @@ function createSlug($text)
 }
 
 /**
+ * Validate if a slug is URL-friendly
+ * Only allows lowercase letters (a-z), numbers (0-9), and hyphens (-)
+ * Returns true if valid, false otherwise
+ */
+function isValidSlug($slug)
+{
+    // Empty slugs will be auto-generated, so they're valid
+    if (empty($slug)) {
+        return true;
+    }
+
+    // Check if slug only contains allowed characters: a-z, 0-9, and -
+    // Also ensure it doesn't start or end with a hyphen
+    return preg_match('/^[a-z0-9]+(-[a-z0-9]+)*$/', $slug) === 1;
+}
+
+/**
  * Upload image with security validation
  * Validates both extension AND actual file content (MIME type)
  */

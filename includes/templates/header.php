@@ -12,9 +12,18 @@ require_once __DIR__ . '/../functions.php';
 
 // Get site settings
 $site_name = getSetting('site_name', 'PipilikaX');
-$site_logo = getSetting('site_logo', 'pipilika-logo.png');
-$site_favicon = getSetting('site_favicon', 'pipilika-favicon.png');
+$site_favicon = getSetting('site_favicon', '');
 $theme_color = '#E90330';
+
+// Determine favicon URL - check uploads first, then assets
+$favicon_url = null;
+if ($site_favicon) {
+    if (file_exists(UPLOAD_PATH . 'settings/' . $site_favicon)) {
+        $favicon_url = UPLOAD_URL . '/settings/' . $site_favicon;
+    } elseif (file_exists(ROOT_PATH . '/assets/images/' . $site_favicon)) {
+        $favicon_url = ASSETS_URL . '/images/' . $site_favicon;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,8 +42,9 @@ $theme_color = '#E90330';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon"
-        href="<?php echo ASSETS_URL; ?>/images/<?php echo htmlspecialchars($site_favicon); ?>">
+    <?php if ($favicon_url): ?>
+        <link rel="icon" type="image/x-icon" href="<?php echo htmlspecialchars($favicon_url); ?>">
+    <?php endif; ?>
 
     <!-- Theme Color -->
     <meta name="theme-color" content="<?php echo htmlspecialchars($theme_color); ?>" />

@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_category'])) {
 
         if (empty($slug)) {
             $slug = createSlug($name);
+        } elseif (!isValidSlug($slug)) {
+            $errors[] = 'Slug must be URL-friendly: only lowercase letters (a-z), numbers (0-9), and hyphens (-) are allowed. Example: "my-category-name"';
         }
 
         // Check if slug is unique
